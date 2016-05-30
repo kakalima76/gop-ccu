@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="app">
+<head>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  
+	<script>
+		$(document).ready(function() {
+		$( "#data" ).datepicker({
+        dateFormat: 'dd/mm/yy',
+        closeText:"Fechar",
+        prevText:"&#x3C;Anterior",
+        nextText:"Próximo&#x3E;",
+        currentText:"Hoje",
+        monthNames: ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
+        monthNamesShort:["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
+            dayNames:["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"],
+            dayNamesShort:["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"],
+        dayNamesMin:["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"],
+        weekHeader:"Sm",
+        firstDay:1
+    });
+});
+	</script>
+
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	
+	<script src='/javascripts/angular.min.js'></script>
+	<script src='/javascripts/angular-cookies.min.js'></script>
+	<script src='/javascripts/app.js'></script>
+	<script src='/javascripts/controllers/escalaController.js'></script>
+	<script src='/javascripts/controllers/ordemController.js'></script>
+	<script src='/javascripts/services/chefesService.js'></script>
+	<script src='/javascripts/factorys/ordemFactory.js'></script>
+
+
+	<title>{{title}}</title>
+</head>
+<body>
+	<header>
+		<img class="logo" src="images/icon.png">
+		<center class="gop">GERÊNCIA DE OPERAÇÕES</center>
+	</header>
+{% block content %}
+</body>
+</html>
+    

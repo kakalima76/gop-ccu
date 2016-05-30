@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="corpo" ng-controller="escalaController">
+
+<nav class="navbar navbar-default">
+ 	<div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	      </button>
+	      <a class="navbar-brand" href="/home">Escala</a>
+	      <a class="navbar-brand" href="/ordem">Ordem de Serviço</a>
+	      <a class="navbar-brand" href="/imprimir">Imprimir</a>
+	    </div>
+	</div>
+</nav>
+
+	<div class="form-group">
+  		<label for="ano">ANO:</label>
+  			<select class="form-control" id="ano" ng-model="ano" ng-options="item as item.ano for item in anos track by item.ano"></select>
+
+  		<label for="mes">Mês:</label>
+  			<select class="form-control" id="mes" ng-model="mes" ng-options="item as item.mes for item in meses track by item.id" ng-change="calcular()"></select>
+
+  		<label for="servico">Status:</label>
+  			<select class="form-control" id="servico" ng-model="servico" ng-options="item as item.status for item in servicos track by item.id" ng-change="testar()"></select>
+
+  		<label for="agente">Agentes:</label>
+  			<select class="form-control" id="agente" ng-model="agente" ng-options="item as item.nome for item in agentes track by item.nome"></select>
+
+  		<label for="folga">Escala:</label>
+  			<select class="form-control" id="folga" ng-model="folga" ng-options="item as item.folga for item in folgas track by item.valor"></select>
+
+  		<label for="inicio">Inicio:</label>
+  			<select class="form-control" id="inicio" ng-model="inicio" ng-options="item as item.dia for item in dias track by item.dia"></select>
+
+  		<label for="fim">Fim:</label>
+  			<select class="form-control" id="fim" ng-model="fim" ng-options="item as item.dia for item in dias track by item.dia"></select>
+
+	</div>
+
+	<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="salvar()">Salvar</button>
+
+</div>
+
+{% endblock %}
