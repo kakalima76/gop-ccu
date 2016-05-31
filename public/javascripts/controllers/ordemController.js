@@ -1,6 +1,8 @@
 angular.module('app')
-.controller('ordemController', ['$scope', '$cookies', 'escalaService', 'ordemFactory', function($scope, $cookies, escalaService, ordemFactory){
+.controller('ordemController', ['$scope', '$cookies', 'escalaService', 'ordemFactory', 'viaturasService', function($scope, $cookies, escalaService, ordemFactory, viaturasService){
 	$scope.chefeTemplate = '/chefia';
+	$scope.equipeTemplate = '/equipes';
+	$scope.viaturaTemplate = '/viaturas';
 	var promise = ordemFactory.getNumero();
 	promise.then(function(data){
 		$scope.numero = data.data[0].numero + 1;
@@ -12,7 +14,11 @@ angular.module('app')
     	return (val === undefined || val == null || val.length <= 0) ? true : false;
 	}
 
-	$scope.equipes = ['','PAF01','PAF02','PAF03','PAF04','PAF05','PAF06','PAF07','PAF08','PAF09', 'PAF010', 'PAF11', 'NEP'];
+	var equipes = ['PAF01','PAF02','PAF03','PAF04','PAF05','PAF06','PAF07','PAF08','PAF09', 'PAF10', 'PAF11', 'NEP'];
+	$scope.equipes = [];
+	equipes.forEach(function(value){
+		$scope.equipes.push({equipe: value})
+	});
 
 
 	var horas = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30', '05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30'];
@@ -20,17 +26,9 @@ angular.module('app')
 
 	horas.forEach(function(value){
 		$scope.horas.push({hora: value})
-	})
+	});
 
-	function resetaCookies(){
-		$cookies.remove('chefes');
-		$cookies.remove('data');
-		$cookies.remove('agentes')
-	}
-
-	
-	
-
+	$scope.viaturas = viaturasService.viaturas;
 
 
 	function criaChefes(){
@@ -95,17 +93,21 @@ angular.module('app')
 		})
 	}//fim do método buscar
 
+
+	//filtro comum aos checkboxes
+	var filtro = function(value){
+		if(value.escalado === true){
+			return true;
+		}
+	}
+
+
+	//tem esse nome  mas na verdade pega os valores de chefes e agentes para a escala
 	$scope.testar = function(valor){
 		var chefes = [];
 		var agentes = [];
 		var strChefes = null;
 		var strAgentes = null;
-
-		var filtro = function(value){
-			if(value.escalado === true){
-				return true;
-			}
-		}
 
 		var testeChefes = $scope.chefes.filter(filtro);
 		testeChefes.forEach(function(value){
@@ -124,9 +126,41 @@ angular.module('app')
 
 	}
 
+	$scope.gerarViaturas = function(valor){
+		var viaturas = $scope.viaturas.filter(filtro);
+		var array = []
+		viaturas.forEach(function(value){
+			array.push(value.tipo + ' ' + value.placa);
+		})
+
+		ordemFactory.setViaturas(array.toString())
+	}
+
+	$scope.gerarEquipe = function(valor){
+		var equipes = $scope.equipes.filter(filtro);
+		var array = []
+		equipes.forEach(function(value){
+			array.push(value.equipe);
+		})
+
+		ordemFactory.setEquipe(array.toString())
+	}
+
+
 	$scope.salvar = function(){
-		if(!isEmpty($scope.data) && !isEmpty($scope.inicio) && !isEmpty($scope.fim)){
-			ordemFactory.set($scope.numero, $scope.data, $scope.inicio.hora, $scope.fim.hora)
+		
+		var acao = function(){
+			if(!isEmpty($scope.acao02) && isEmpty($scope.acao03)){
+				return $scope.acao01 + ',' +$scope.acao02;
+			}else if(!isEmpty($scope.acao02) && !isEmpty($scope.acao03)){
+				return $scope.acao01 + ',' + $scope.acao02 + ',' + $scope.acao03
+			}
+
+			return $scope.acao01;
+		}
+
+		if(!isEmpty($scope.data) && !isEmpty($scope.inicio) && !isEmpty($scope.fim) && !isEmpty($scope.acao01)){
+			ordemFactory.set($scope.numero, $scope.data.replace(/(\/)+/g, ''), $scope.inicio.hora, $scope.fim.hora, acao())
 		}
 
 		console.log(ordemFactory.get());

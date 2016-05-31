@@ -19,7 +19,18 @@ router.get('/imprimir', function(req, res, next) {
 });
 
 router.get('/chefia', function(req, res, next) {
-  res.render('templates/chefia', { title: 'Página de impressão'});
+  res.render('templates/chefia');
 });
+
+router.get('/equipes', function(req, res, next) {
+  res.render('templates/equipes');
+});
+
+router.get('/viaturas', function(req, res, next) {
+  res.render('templates/viaturas');
+});
+
+
+
 
 module.exports = router;

@@ -30,6 +30,21 @@
   	<label for="fim">Término</label>
   	<select class="form-control" id="fim" ng-model="fim" ng-options="item as item.hora for item in horas track by item.hora"></select>
 
+    <label for="fim">1ª Ação Programada</label>
+    <div class="inputBox">
+    <textarea class="form-control" rows="3" ng-model="acao01"></textarea>
+    </div>
+
+    <label for="fim">2ª Ação Programada</label>
+    <div class="inputBox">
+    <textarea class="form-control" rows="3" ng-model="acao02"></textarea>
+    </div>
+
+    <label for="fim">3ª Ação Programada</label>
+    <div class="inputBox">
+    <textarea class="form-control" rows="3" ng-model="acao03"></textarea>
+    </div>
+
   	<div class="inputBox">
   	<label>Chefes disponíveis:</label>
   	</div>
@@ -44,7 +59,25 @@
 	  	
   		<div ng-repeat="chefe in agentes" id="selecao">
   		<div ng-include="chefeTemplate"></div>
-  		</div>   
+  		</div> 
+
+
+    <div class="inputBox">
+    <label>Equipes:</label>
+    </div>
+      
+      <div ng-repeat="equipe in equipes" id="selecao">
+      <div ng-include="equipeTemplate"></div>
+      </div>
+
+    <div class="inputBox">
+    <label>Viaturas:</label>
+    </div>
+      
+      <div ng-repeat="viatura in viaturas" id="selecao">
+      <div ng-include="viaturaTemplate"></div>
+      </div> 
+
 
   	<div class="inputBox">
   	<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="salvar()">Salvar</button>

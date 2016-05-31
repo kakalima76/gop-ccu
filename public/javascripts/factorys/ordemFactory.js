@@ -25,12 +25,22 @@ angular.module('app')
 	}
 
 
-    var set = function(numero, data, apresentacao, termino){
+    var set = function(numero, data, apresentacao, termino, acao){
     	ordem.numero = numero;
     	ordem.data = data;
     	ordem.apresentacao = apresentacao;
     	ordem.termino = termino;
+    	ordem.acao = acao;
     }
+
+    var setViaturas = function(viatura){
+    	ordem.viatura = viatura;
+    }
+
+    var setEquipe = function(equipe){
+    	ordem.equipe = equipe
+    }
+
 
     var get = function(){
     	return ordem;
@@ -46,7 +56,9 @@ angular.module('app')
     		get: get,
     		set: set,
     		setEscala: setEscala,
-    		getNumero: getNumero
+    		getNumero: getNumero,
+    		setViaturas: setViaturas,
+    		setEquipe: setEquipe
     	}
 
 
