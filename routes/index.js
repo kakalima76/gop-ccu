@@ -30,6 +30,11 @@ router.get('/viaturas', function(req, res, next) {
   res.render('templates/viaturas');
 });
 
+router.get('/ordens', function(req, res, next) {
+  res.render('templates/ordens');
+});
+
+
 
 
 

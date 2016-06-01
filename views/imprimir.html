@@ -1,20 +1,102 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="app">
+<head>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-{% block content %}
-<div class="corpo">
-	<nav class="navbar navbar-default">
-	 	<div class="container-fluid">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		        <span class="sr-only">Toggle navigation</span>
-		      </button>
-		      <a class="navbar-brand" href="/home">Escala</a>
-		      <a class="navbar-brand" href="/ordem">Ordem de Serviço</a>
-		      <a class="navbar-brand" href="/imprimir">Imprimir</a>
-		    </div>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  
+	<script>
+		$(document).ready(function() {
+		$( ".data" ).datepicker({
+        dateFormat: 'dd/mm/yy',
+        closeText:"Fechar",
+        prevText:"&#x3C;Anterior",
+        nextText:"Próximo&#x3E;",
+        currentText:"Hoje",
+        monthNames: ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
+        monthNamesShort:["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
+            dayNames:["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"],
+            dayNamesShort:["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"],
+        dayNamesMin:["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"],
+        weekHeader:"Sm",
+        firstDay:1
+    });
+});
+	</script>
+
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	
+	<script src='/javascripts/angular.min.js'></script>
+	<script src='/javascripts/angular-cookies.min.js'></script>
+	<script src='/javascripts/app.js'></script>
+	<script src='/javascripts/controllers/escalaController.js'></script>
+	<script src='/javascripts/controllers/ordemController.js'></script>
+	<script src='/javascripts/controllers/imprimirController.js'></script>
+	<script src='/javascripts/services/chefesService.js'></script>
+	<script src='/javascripts/services/ordemService.js'></script>
+	<script src='/javascripts/services/viaturasService.js'></script>
+	<script src='/javascripts/factorys/ordemFactory.js'></script>
+
+
+	<title>{{title}}</title>
+</head>
+<body ng-controller="imprimirController">
+
+	<div class="headerTabela">
+		<img src="images/brasao.png" class="brasao">
+
+		<div class="headerTabelaTexto">
+			<h5 class="negrito">PREFEITURA DA CIDADE DO RIO DE JANEIRO</h5>
+			<h5 class="negrito">SECRETARIA MUNICIPAL DE ORDEM PÚBLICA</h5>
+			<h5 class="negrito">COORDENAÇÃO DE CONTROLE URBANO</h5>
+			<h5 class="negrito">SUBGERÊNCIA DE PROGRAMAÇÃO FISCAL E APOIO OPERACIONAL</h5>
 		</div>
-	</nav>
-</div>
 
-{% endblock %}
+		<img src="images/jogos.png" class="jogos">
+	</div>
+
+	<div class="dataHeader negrito" ng-bind="data">
+	</div>
+
+	<div class="inputBox negrito">
+	DETERMINAÇÕES GERAIS
+	</div>
+
+	 <ul class="list-group justificado">
+  		<li class="list-group-item"><span class="amarelo">Os agentes, lotados nesta Coordenação, deverão manter-se devidamente uniformizados durante o serviço, de acordo com a determinação descrita na portaria "P" F/CCU Nº 16  de 29 de outtubro de 2013.</span></li>
+  		<li class="list-group-item"><span class="amarelo">Os agentes, durante o serviço, deverão "CONTROLAR", "COIBIR", "ORDENAR", "FISCALIZAR" e "REPRIMIR" as irregularidades exercidas em logradouro público, bem como no logradouro público, zelando pelo cumprimento do código de posturas municipais.</span></li>
+  		<li class="list-group-item"><span class="amarelo">Realizar a lavratura de Auto de Apreensão de acordo com a necessidade de serviço.</span></li>
+	</ul>
+
+	
+
+	<table class="tituloTabela">
+	<tr>
+	<td class="col4 negrito">PROGRAMAÇÃO OPERACIONAL DE FISCALIZAÇÃO</td>
+	<td class="col3 amarelo">CHEFIAS</td>
+	<td class="col3 amarelo">Nº  P.O.F</td>
+	<td class="col3 amarelo">VIATURA(S)</td>
+	</table>
+	  	
+  		<div ng-repeat="ordem in ordens" id="selecao">
+  		<div ng-include="ordemTemplate"></div>
+  		</div> 
+
+  	<div class="inputBox negrito">
+	<center ng-click="retornar()">"JUNTOS SOMOS FORTES"</center>
+	</div>
+
+</body>
+</html>
+    

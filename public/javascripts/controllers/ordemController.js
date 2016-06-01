@@ -7,11 +7,16 @@ angular.module('app')
 	promise.then(function(data){
 		$scope.numero = data.data[0].numero + 1;
 	})
-	
-	
+		
 
 	function isEmpty(val){
     	return (val === undefined || val == null || val.length <= 0) ? true : false;
+	}
+
+
+	$scope.imprimir = function(value){
+		$cookies.put('dia', value);
+		window.location.href = "/imprimir";
 	}
 
 	var equipes = ['PAF01','PAF02','PAF03','PAF04','PAF05','PAF06','PAF07','PAF08','PAF09', 'PAF10', 'PAF11', 'NEP'];
@@ -53,7 +58,7 @@ angular.module('app')
 	
 	$scope.buscar = function(valorData){
 		var date = valorData.replace(/(\/)+/g, '');
-		$cookies.put('data', valorData);
+		/*$cookies.put('data', valorData);*/
 
 		var filtrarAgentes = function (value) {
 			if(value.data === date && value.status === 'plantão' && value.chefe === false){
@@ -164,7 +169,7 @@ angular.module('app')
 		}
 
 		console.log(ordemFactory.get());
-	/*	window.location.href = "/imprimir";*/
+	
 	}
 
 }])
