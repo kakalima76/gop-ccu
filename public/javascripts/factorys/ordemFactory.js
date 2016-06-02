@@ -13,7 +13,9 @@ angular.module('app')
         "agentes": "",
         "viatura": "",
         "chefe": "",
-        "acao": "",
+        "acao01": "",
+        "acao02": "",
+        "acao03": "",
         "equipe": ""
     }
 
@@ -25,12 +27,14 @@ angular.module('app')
 	}
 
 
-    var set = function(numero, data, apresentacao, termino, acao){
+    var set = function(numero, data, apresentacao, termino, acao01, acao02, acao03){
     	ordem.numero = numero;
     	ordem.data = data;
     	ordem.apresentacao = apresentacao;
     	ordem.termino = termino;
-    	ordem.acao = acao;
+    	ordem.acao01 = acao01;
+        ordem.acao02 = acao02;
+        ordem.acao03 = acao03;
     }
 
     var setViaturas = function(viatura){

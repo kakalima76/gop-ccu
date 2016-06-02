@@ -34,6 +34,14 @@ router.get('/ordens', function(req, res, next) {
   res.render('templates/ordens');
 });
 
+router.get('/cadastrar', function(req, res, next) {
+  res.render('cadastrar');
+});
+
+router.get('/trocar', function(req, res, next) {
+  res.render('trocar');
+});
+
 
 
 

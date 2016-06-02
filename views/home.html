@@ -10,9 +10,9 @@
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 	        <span class="sr-only">Toggle navigation</span>
 	      </button>
-	      <a class="navbar-brand" href="/home">Escala</a>
 	      <a class="navbar-brand" href="/ordem">Ordem de Serviço</a>
-	      <a class="navbar-brand" href="/imprimir">Imprimir</a>
+        <a class="navbar-brand" href="/trocar">Trocar</a>
+	      <a class="navbar-brand" href="/cadastrar">Cadastrar</a>
 	    </div>
 	</div>
 </nav>
@@ -25,7 +25,7 @@
   			<select class="form-control" id="mes" ng-model="mes" ng-options="item as item.mes for item in meses track by item.id" ng-change="calcular()"></select>
 
   		<label for="servico">Status:</label>
-  			<select class="form-control" id="servico" ng-model="servico" ng-options="item as item.status for item in servicos track by item.id" ng-change="testar()"></select>
+  			<select class="form-control" id="servico" ng-model="servico" ng-options="item as item.status for item in servicos track by item.status" ng-change="testar()"></select>
 
   		<label for="agente">Agentes:</label>
   			<select class="form-control" id="agente" ng-model="agente" ng-options="item as item.nome for item in agentes track by item.nome"></select>

@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="corpo" ng-controller="trocarController">
+	<nav class="navbar navbar-default" >
+      <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/home">Escalar</a>
+            <a class="navbar-brand" href="/ordem">Ordem de Serviço</a>
+            <a class="navbar-brand" href="/cadastrar" >Cadastrar</a>
+          </div>
+          <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                  <input type="text" ng-model="dia" class="form-control data" placeholder="buscar escalados" ng-change="buscar(dia)">
+              </div>
+            </form>
+      </div>
+    </nav>
+
+	<div class="form-group">
+
+  	<div class="inputBox">
+  	<label>Chefes disponíveis:</label>
+  	</div>
+	  	
+  		<div ng-repeat="chefe in chefes" id="selecao">
+  		<div ng-include="chefeTemplate"></div>
+  		</div>
+
+
+    <div class="inputBox">
+    <label>Chefes Escalados:</label>
+    </div>
+      
+      <div ng-repeat="chefe in chefesEscalados" id="selecao">
+      <div ng-include="chefeTemplate"></div>
+      </div> 
+
+  	<div class="inputBox">
+  	<label>Agentes disponíveis:</label>
+  	</div>
+	  	
+  		<div ng-repeat="chefe in agentes" id="selecao">
+  		<div ng-include="chefeTemplate"></div>
+  		</div> 
+
+    <div class="inputBox">
+    <label>Agentes escalados:</label>
+    </div>
+      
+      <div ng-repeat="chefe in agentesEscalados" id="selecao">
+      <div ng-include="chefeTemplate"></div>
+      </div> 
+
+
+  	<div class="inputBox">
+  	<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="salvar()">Salvar</button>
+  	</div>	
+
+    </div>
+</div>
+
+{% endblock %}

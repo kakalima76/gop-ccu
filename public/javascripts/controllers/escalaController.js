@@ -1,7 +1,5 @@
 angular.module('app')
-.controller('escalaController', ['$scope',function($scope){
-	console.log('entrei');
-
+.controller('escalaController', ['$scope', '$http', '$q',function($scope, $http, $q){
 	$scope.dias = [];
 
 	$scope.anos = 
@@ -43,29 +41,6 @@ angular.module('app')
 		{id: 11, status: 'feira'}
 	];
 
-
-
-	var agentes = 
-	[
-		{nome: 'norlan', setor: 'PAF11'}, 
-		{nome: 'magna', setor: 'PAF11'},
-		{nome: 'luiz', setor: 'PAF11'},
-		{nome: 'sandro', setor: 'PAF11'},
-		{nome: 'de sá', setor: 'PAF11'},
-		{nome: 'mauro', setor: 'PAF11'},
-		{nome: 'queiroz', setor: 'PAF10'},
-		{nome: 'manuelle', setor: 'PAF10'},
-		{nome: 'daniel', setor: 'PAF10'},
-		{nome: 'cristiane soares', setor: 'PAF10'},
-		{nome: 'janise', setor: 'PAF10'},
-		{nome: 'miranda', setor: 'PAF10'},
-		{nome: 'debora', setor: 'GOP'},
-		{nome: 'nieraldo', setor: 'NPMA'},
-		{nome: 'aurelio', setor: 'GOP'},
-		{nome: 'carmo', setor: 'GOP'}
-
-	];
-
 	function compare(a,b) {
 	  	if(a.nome < b.nome){
 	  		return -1;
@@ -76,14 +51,27 @@ angular.module('app')
 	    }	 
 	}
 
+	var agentes = [];
+
+
+	var promise = $http.get('http://ccuanexos.herokuapp.com/agentes');
+	promise.then(function(dados){
+		dados.data.forEach(function(value){
+			agentes.push({nome: value.nome});
+		})
+
+		$scope.agentes = agentes.sort(compare);
+		
+	})
+
 	$scope.agentes = agentes.sort(compare);
 
 	$scope.folgas = 
 	[
-		{valor: 0, folga: '1x1'},
-		{valor: 1, folga: '2x1'},
-		{valor: 2, folga: '3x1'},
-		{valor: 3, folga: '4x1'}
+		{valor: 1, folga: '0x1'},
+		{valor: 2, folga: '1x1'},
+		{valor: 3, folga: '2x1'},
+		{valor: 4, folga: '3x1'}
 	];
 
 	function dias(val, val2){
@@ -97,8 +85,6 @@ angular.module('app')
 			return 30;
 		}
 	}
-
-
 
 	function isEmpty(val){
     	return (val === undefined || val == null || val.length <= 0) ? true : false;
@@ -118,13 +104,66 @@ angular.module('app')
 	}
 
 
+	function popula(){
+		var mes = $scope.mes.id;
+		var ano = $scope.ano.ano;
+		var inicio = $scope.inicio.dia;
+		var fim = $scope.fim.dia;
+		var passo = $scope.folga.valor;
+		var agente = $scope.agente;
+		var status = $scope.servico;
+
+		function contar (inicio, fim, passo){
+		cont = 0;
+		do{
+			inicio+=passo;
+			cont++;
+		}while(inicio <= fim);
+		return cont;
+	}
+
+
+			function zeros(num){
+			return (num < 10) ? '0' + num : num;
+			}
+
+			var flag = contar(inicio, fim, passo);
+			var count = 0;
+			for(var i = inicio; i <= fim; i+=passo){
+
+			var body = 
+			{
+			nome: agente.nome,
+			data: zeros(i)+zeros(mes)+ano,
+			ordem: '0',
+			status: status.status
+			}
+
+			console.log(body);
+
+			var promise = $http.put('http://ccuanexos.herokuapp.com/agentes/escala', body);
+			promise.then(function(){
+				count+=1;
+				if(flag === count){
+					alert('Escala salva com sucesso.')
+				}
+			});
+
+			promise.catch(function(err){
+				if(flag === count){
+					alert('Verifique seus dados. Impossível realizar a operação')
+				}
+			});
+
+		}//fim do laço for
+}//fim da função popula
+
 	$scope.salvar = function(){
 		if(!isEmpty($scope.ano) && !isEmpty($scope.mes) && !isEmpty($scope.servico)  && !isEmpty($scope.agente) && !isEmpty($scope.folga) && !isEmpty($scope.inicio) && !isEmpty($scope.fim)){
-			console.log('tudo ok');
+			popula();
 		}else{
 			alert('Preencha todos os campos!!!'); 
 		}
 	}
-
 
 }])

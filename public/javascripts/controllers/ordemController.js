@@ -61,14 +61,18 @@ angular.module('app')
 		/*$cookies.put('data', valorData);*/
 
 		var filtrarAgentes = function (value) {
-			if(value.data === date && value.status === 'plantão' && value.chefe === false){
-				return true;
+			if(value[date]){
+				if(value[date].status === 'plantão' && value.chefe === false){
+					return true;
+				}
 			}
 		}
 
 		var filtrarChefes = function (value) {
-			if(value.data === date && value.status === 'plantão' && value.chefe === true){
-				return true;
+			if(value[date]){
+				if(value[date].status === 'plantão' && value.chefe === true){
+					return true;
+				}
 			}
 		}
 
@@ -90,6 +94,7 @@ angular.module('app')
 
 			$cookies.put('agentes', newAgentes);
 			$cookies.put('chefes', newChefes);
+
 
 			
 		}).then(function(){
@@ -114,20 +119,20 @@ angular.module('app')
 		var strChefes = null;
 		var strAgentes = null;
 
-		var testeChefes = $scope.chefes.filter(filtro);
+		var testeChefes = $scope.chefes.filter(filtroEscalado);
 		testeChefes.forEach(function(value){
-			chefes.push(value.nome);
+			chefes.push(' ' + value.nome);
 		})
 
-		var testeChefes = $scope.agentes.filter(filtro);
+		var testeChefes = $scope.agentes.filter(filtroEscalado);
 		testeChefes.forEach(function(value){
-			agentes.push(value.nome);
+			agentes.push(' ' + value.nome);
 		})
 
 		strChefes = chefes.toString();
 		strAgentes = agentes.toString();
 
-		ordemFactory.setEscala(strChefes, strAgentes);
+		ordemFactory.setEscala(strChefes.trim(), strAgentes.trim());
 
 	}
 
@@ -135,40 +140,48 @@ angular.module('app')
 		var viaturas = $scope.viaturas.filter(filtro);
 		var array = []
 		viaturas.forEach(function(value){
-			array.push(value.tipo + ' ' + value.placa);
+			array.push(' ' + value.tipo + ' ' + value.placa);
 		})
 
-		ordemFactory.setViaturas(array.toString())
+		ordemFactory.setViaturas(array.toString().trim())
 	}
 
 	$scope.gerarEquipe = function(valor){
 		var equipes = $scope.equipes.filter(filtro);
 		var array = []
 		equipes.forEach(function(value){
-			array.push(value.equipe);
+			array.push(' ' + value.equipe);
 		})
 
-		ordemFactory.setEquipe(array.toString())
+		ordemFactory.setEquipe(array.toString().trim())
 	}
 
 
 	$scope.salvar = function(){
-		
-		var acao = function(){
-			if(!isEmpty($scope.acao02) && isEmpty($scope.acao03)){
-				return $scope.acao01 + ',' +$scope.acao02;
-			}else if(!isEmpty($scope.acao02) && !isEmpty($scope.acao03)){
-				return $scope.acao01 + ',' + $scope.acao02 + ',' + $scope.acao03
-			}
+	var acao01 = '';
+	var acao02 = '';
+	var acao03 = '';
 
-			return $scope.acao01;
-		}
+	if(!isEmpty($scope.acao01)){
+		acao01 ='- Ação programada 01: ' + $scope.acao01;
+	}
+
+	if(!isEmpty($scope.acao02)){
+		acao02 ='- Ação programada 02: ' + $scope.acao02;
+	}
+
+	if(!isEmpty($scope.acao03)){
+		acao03 ='- Ação programada 03: ' + $scope.acao03;
+	}
 
 		if(!isEmpty($scope.data) && !isEmpty($scope.inicio) && !isEmpty($scope.fim) && !isEmpty($scope.acao01)){
-			ordemFactory.set($scope.numero, $scope.data.replace(/(\/)+/g, ''), $scope.inicio.hora, $scope.fim.hora, acao())
+			ordemFactory.set($scope.numero, $scope.data.replace(/(\/)+/g, ''), $scope.inicio.hora, $scope.fim.hora, acao01, acao02, acao03)
+			window.location.href = "/ordem";
+		}else{
+			alert('Alguns campos faltando!!!')
 		}
 
-		console.log(ordemFactory.get());
+		
 	
 	}
 
