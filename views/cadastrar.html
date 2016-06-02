@@ -21,7 +21,7 @@
   		<form>
             <div class="form-group">
                 <label for="nome">Matrícula:</label>
-                    <input type="text" class="form-control" placeholder="matricula" ng-model='matricula'>
+                    <input type="text" class="form-control" placeholder="matricula" ng-model='matricula' maxlength="7">
             </div>
 
             
@@ -36,7 +36,7 @@
             </div>
 
                 <label for="satus">Status:</label>
-                    <select class="form-control" ng-model="status" ng-options="item as item.status for item in opcoes track by item.status" ng-change="calcular()"></select>
+                    <select class="form-control" ng-model="status" ng-options="item as item.status for item in opcoes track by item.chefe" ng-change="calcular()"></select>
  
  
       <div class="inputBox">

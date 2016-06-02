@@ -4,8 +4,8 @@ angular.module('app')
 
 	$scope.opcoes = 
 	[
-	{status: 'agente'},
-	{status: 'chefe'}
+	{status: 'agente', chefe: false},
+	{status: 'chefe', chefe: true}
 	];
 
 	var dia = '08062016'
@@ -14,6 +14,10 @@ angular.module('app')
 		if(value[dia].status === 'plantão'){
 			return true;
 		}
+	}
+
+	function isEmpty(val){
+    	return (val === undefined || val == null || val.length <= 0) ? true : false;
 	}
 
 	var promise = $http.get('http://ccuanexos.herokuapp.com/agentes');
@@ -25,6 +29,28 @@ angular.module('app')
 			
 		})
 	})
+
+	$scope.salvar = function(){
+		var obj = {}
+		obj['contato'] = 'S/C'
+		if(isEmpty($scope.nome) && isEmpty($scope.matricula) && isEmpty($scope.status)){
+			alert('Informações essenciais faltando!');
+		}else{
+			obj['nome'] = $scope.nome;
+			obj['contato'] = $scope.contato;
+			obj['matricula'] = $scope.matricula;
+			obj['chefe'] = $scope.status.status;
+			var promise = $http.post('http://ccuanexos.herokuapp.com/agentes', obj);
+			promise.then(function(dados){
+				alert('Salvo com sucesso!');
+			});
+			promise.catch(function(err){
+				alert('Registro já consta na base de dados.');
+			})
+		}
+
+
+	}
 
 
 }])

@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('ordemController', ['$scope', '$cookies', 'escalaService', 'ordemFactory', 'viaturasService', function($scope, $cookies, escalaService, ordemFactory, viaturasService){
+.controller('ordemController', ['$scope', '$cookies', 'escalaService', 'ordemFactory', 'viaturasService', 'escalaService', function($scope, $cookies, escalaService, ordemFactory, viaturasService, escalaService){
 	$scope.chefeTemplate = '/chefia';
 	$scope.equipeTemplate = '/equipes';
 	$scope.viaturaTemplate = '/viaturas';
@@ -62,7 +62,7 @@ angular.module('app')
 
 		var filtrarAgentes = function (value) {
 			if(value[date]){
-				if(value[date].status === 'plantão' && value.chefe === false){
+				if((value[date].status === 'plantão' || value[date].status === 'extra') && value.chefe === false){
 					return true;
 				}
 			}
@@ -70,7 +70,7 @@ angular.module('app')
 
 		var filtrarChefes = function (value) {
 			if(value[date]){
-				if(value[date].status === 'plantão' && value.chefe === true){
+				if((value[date].status === 'plantão' || value[date].status === 'extra') && value.chefe === true){
 					return true;
 				}
 			}
@@ -85,11 +85,11 @@ angular.module('app')
 			var newChefes = []
 			
 			arrayAgentes.forEach(function(value){
-				newAgentes.push(value.nome);
+				newAgentes.push(value.nome + " (" + value.contato + ")" + " - " + value[date].status);
 			})
 
 			arrayChefes.forEach(function(value){
-				newChefes.push(value.nome);
+				newChefes.push(value.nome + " (" + value.contato + ")" + " - " + value[date].status);
 			})
 
 			$cookies.put('agentes', newAgentes);
@@ -119,12 +119,12 @@ angular.module('app')
 		var strChefes = null;
 		var strAgentes = null;
 
-		var testeChefes = $scope.chefes.filter(filtroEscalado);
+		var testeChefes = $scope.chefes.filter(filtro);
 		testeChefes.forEach(function(value){
 			chefes.push(' ' + value.nome);
 		})
 
-		var testeChefes = $scope.agentes.filter(filtroEscalado);
+		var testeChefes = $scope.agentes.filter(filtro);
 		testeChefes.forEach(function(value){
 			agentes.push(' ' + value.nome);
 		})
@@ -175,8 +175,25 @@ angular.module('app')
 	}
 
 		if(!isEmpty($scope.data) && !isEmpty($scope.inicio) && !isEmpty($scope.fim) && !isEmpty($scope.acao01)){
-			ordemFactory.set($scope.numero, $scope.data.replace(/(\/)+/g, ''), $scope.inicio.hora, $scope.fim.hora, acao01, acao02, acao03)
-			window.location.href = "/ordem";
+			var data = $scope.data.replace(/(\/)+/g, '');
+			var os = $scope.numero;
+			var status = 'escalado';
+			ordemFactory.set(os, data, $scope.inicio.hora, $scope.fim.hora, acao01, acao02, acao03)
+			var ordem = ordemFactory.get();
+			var arrayAgentes = ordem.agentes.split(',');
+			var arrayChefes = ordem.chefe.split(',');
+
+			arrayAgentes.forEach(function(nome){
+				var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- plantão', '').replace('- extra', '').trim()
+				escalaService.atualizar(aux, os, status, data);
+			})
+
+			arrayChefes.forEach(function(nome){
+				var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- plantão', '').replace('- extra', '').trim()
+				escalaService.atualizar(aux, os, status, data);
+			})
+
+			//window.location.href = "/ordem";
 		}else{
 			alert('Alguns campos faltando!!!')
 		}

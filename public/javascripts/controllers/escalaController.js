@@ -1,7 +1,8 @@
 angular.module('app')
 .controller('escalaController', ['$scope', '$http', '$q',function($scope, $http, $q){
+	$scope.checado = true;
 	$scope.dias = [];
-
+	var pesquisado = [];
 	$scope.anos = 
 	[
 		{'ano': 2016}, 
@@ -103,6 +104,27 @@ angular.module('app')
 		}	
 	}
 
+	$scope.pesquisar = function(agente){
+		pesquisado = [];
+		var data = '08/06/2016';
+		console.log('nome:' + agente.nome);
+		function filtro(value){
+			if(value.nome === agente.nome){
+				return true;
+			}
+		}
+
+
+		var promise = $http.get('http://ccuanexos.herokuapp.com/agentes');
+		promise.then(function(dados){
+			var array = dados.data.filter(filtro);
+			array.forEach(function(value){
+				pesquisado.push(value);
+			})
+
+			$scope.checado = false;
+		})
+	}
 
 	function popula(){
 		var mes = $scope.mes.id;
@@ -131,29 +153,39 @@ angular.module('app')
 			var count = 0;
 			for(var i = inicio; i <= fim; i+=passo){
 
+			var data = zeros(i)+zeros(mes)+ano
 			var body = 
 			{
 			nome: agente.nome,
-			data: zeros(i)+zeros(mes)+ano,
+			data: data,
 			ordem: '0',
 			status: status.status
 			}
 
-			console.log(body);
-
-			var promise = $http.put('http://ccuanexos.herokuapp.com/agentes/escala', body);
-			promise.then(function(){
-				count+=1;
-				if(flag === count){
-					alert('Escala salva com sucesso.')
+			function filtro(value){
+				if(value[data]){
+					if(value[data].status === 'escalado'){
+						return true;
+					}
 				}
-			});
+			}
 
-			promise.catch(function(err){
-				if(flag === count){
-					alert('Verifique seus dados. Impossível realizar a operação')
-				}
-			});
+			var resp = pesquisado.filter(filtro);
+			if(resp.length === 0){
+				var promise = $http.put('http://ccuanexos.herokuapp.com/agentes/escala', body);
+				promise.then(function(){
+					count+=1;
+					if(flag === count){
+						alert('Escala salva com sucesso.')
+					}
+				});
+
+				promise.catch(function(err){
+					if(flag === count){
+						alert('Verifique seus dados. Impossível realizar a operação')
+					}
+				});
+			}
 
 		}//fim do laço for
 }//fim da função popula
@@ -161,9 +193,12 @@ angular.module('app')
 	$scope.salvar = function(){
 		if(!isEmpty($scope.ano) && !isEmpty($scope.mes) && !isEmpty($scope.servico)  && !isEmpty($scope.agente) && !isEmpty($scope.folga) && !isEmpty($scope.inicio) && !isEmpty($scope.fim)){
 			popula();
+			$scope.checado = true;
 		}else{
 			alert('Preencha todos os campos!!!'); 
 		}
 	}
+
+
 
 }])

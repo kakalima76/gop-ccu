@@ -28,16 +28,16 @@
   			<select class="form-control" id="servico" ng-model="servico" ng-options="item as item.status for item in servicos track by item.status" ng-change="testar()"></select>
 
   		<label for="agente">Agentes:</label>
-  			<select class="form-control" id="agente" ng-model="agente" ng-options="item as item.nome for item in agentes track by item.nome"></select>
+  			<select class="form-control" id="agente" ng-model="agente" ng-options="item as item.nome for item in agentes track by item.nome" ng-change=(pesquisar(agente))></select>
 
   		<label for="folga">Escala:</label>
-  			<select class="form-control" id="folga" ng-model="folga" ng-options="item as item.folga for item in folgas track by item.valor"></select>
+  			<select class="form-control" id="folga" ng-model="folga" ng-options="item as item.folga for item in folgas track by item.valor" ng-disabled="checado"></select>
 
   		<label for="inicio">Inicio:</label>
-  			<select class="form-control" id="inicio" ng-model="inicio" ng-options="item as item.dia for item in dias track by item.dia"></select>
+  			<select class="form-control" id="inicio" ng-model="inicio" ng-options="item as item.dia for item in dias track by item.dia" ng-disabled="checado"></select>
 
   		<label for="fim">Fim:</label>
-  			<select class="form-control" id="fim" ng-model="fim" ng-options="item as item.dia for item in dias track by item.dia"></select>
+  			<select class="form-control" id="fim" ng-model="fim" ng-options="item as item.dia for item in dias track by item.dia" ng-disabled="checado"></select>
 
 	</div>
 

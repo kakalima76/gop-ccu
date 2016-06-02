@@ -6,7 +6,7 @@ angular.module('app')
 
 	{
         "status": "ativa",
-        "numero": 1,
+        "numero": 0,
         "data": "",
         "apresentacao": "",
         "termino": "",
