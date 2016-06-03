@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('ordemController', ['$scope', '$cookies', 'escalaService', 'ordemFactory', 'viaturasService', 'escalaService', function($scope, $cookies, escalaService, ordemFactory, viaturasService, escalaService){
+.controller('ordemController', ['$scope', '$cookies', 'escalaService', 'ordemFactory', 'viaturasService', 'escalaService', 'ordemService', function($scope, $cookies, escalaService, ordemFactory, viaturasService, escalaService, ordemService){
 	$scope.chefeTemplate = '/chefia';
 	$scope.equipeTemplate = '/equipes';
 	$scope.viaturaTemplate = '/viaturas';
@@ -183,7 +183,7 @@ angular.module('app')
 			var arrayAgentes = ordem.agentes.split(',');
 			var arrayChefes = ordem.chefe.split(',');
 
-			arrayAgentes.forEach(function(nome){
+			/*arrayAgentes.forEach(function(nome){
 				var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- plantão', '').replace('- extra', '').trim()
 				escalaService.atualizar(aux, os, status, data);
 			})
@@ -191,7 +191,10 @@ angular.module('app')
 			arrayChefes.forEach(function(nome){
 				var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- plantão', '').replace('- extra', '').trim()
 				escalaService.atualizar(aux, os, status, data);
-			})
+			})*/
+
+			console.log(ordemFactory.get());
+			ordemService.set(ordemFactory.get());
 
 			//window.location.href = "/ordem";
 		}else{

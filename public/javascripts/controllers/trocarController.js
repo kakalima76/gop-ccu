@@ -1,13 +1,9 @@
 angular.module('app')
-.controller('trocarController', ['$scope', '$cookies', 'escalaService', function($scope, $cookies, escalaService){
-	$scope.imprimir = function(value){
-		console.log(value);
-	}
+.controller('trocarController', ['$scope', '$cookies', 'escalaService', 'ordemService', function($scope, $cookies, escalaService, ordemService){
+	$scope.chefeTemplate = '/chefiaTrocar';
+	$scope.agentesTemplate = '/agentesTrocar';
+	var resp = []
 
-	$cookies.remove('chefes');
-	$cookies.remove('agentes');
-
-	$scope.chefeTemplate = '/chefia';
 
 	function criaChefesDisp(){
 		$scope.chefes = [];
@@ -26,6 +22,16 @@ angular.module('app')
 			$scope.agentes.push({nome: value, escalado: false});
 		})
 
+	}
+
+	$scope.trocarAgente = function(value){
+		var prompt = prompt('Digite o número da nova ordem de serviço:');
+	
+	}
+
+	$scope.trocarChefe = function(value){
+		var prompt = prompt('Digite o número da nova ordem de serviço:');
+		
 	}
 
 
@@ -52,11 +58,18 @@ angular.module('app')
 	
 	$scope.buscar = function(valorData){
 		var date = valorData.replace(/(\/)+/g, '');
-		/*$cookies.put('data', valorData);*/
+		
+		function filtrarOrdem(value){
+			if(value.data === date){
+				return true;
+			}
+		}
+
+		
 
 		var filtrarAgentesDisp = function(value){
 			if(value[date]){
-				if(value[date].status === 'plantão' && value.chefe === false){
+				if((value[date].status === 'plantão' || value[date].status === 'extra') && value.chefe === false){
 				return true;
 				}
 			}
@@ -64,7 +77,7 @@ angular.module('app')
 
 		var filtrarChefesDisp = function(value){
 			if(value[date]){
-				if(value[date].status === 'plantão' && value.chefe === true){
+				if((value[date].status === 'plantão' || value[date].status === 'extra') && value.chefe === true){
 				return true;
 				}
 			}
@@ -86,6 +99,16 @@ angular.module('app')
 			}
 		}
 
+		function achaOrdem(){
+			var promise = ordemService.get();
+			promise.then(function(dados){
+				array = dados.data.filter(filtrarOrdem);
+				array.forEach(function(ordem){
+					resp.push(ordem.numero);
+				})
+			})
+		}
+
 
 		var promise = escalaService.get();
 		promise.then(function(data){
@@ -103,19 +126,19 @@ angular.module('app')
 
 			
 			arrayAgentesDisp.forEach(function(value){
-				newAgentesDisp.push(value.nome);
+				newAgentesDisp.push(value.nome + ' - ' + value[date].status);
 			})
 
 			arrayChefesDisp.forEach(function(value){
-				newChefesDisp.push(value.nome);
+				newChefesDisp.push(value.nome + ' - ' + value[date].status);
 			})
 
 			arrayAgentesEscalados.forEach(function(value){
-				newAgentesEscalados.push(value.nome);
+				newAgentesEscalados.push(value.nome + ' - Nº P.O.F: ' + value[date].ordem);
 			})
 
 			arrayChefesEscalados.forEach(function(value){
-				newChefesEscalados.push(value.nome);
+				newChefesEscalados.push(value.nome + ' - Nº P.O.F: ' + value[date].ordem);
 			})
 
 			$cookies.put('agentesDisp', newAgentesDisp);
@@ -125,6 +148,7 @@ angular.module('app')
 
 			
 		}).then(function(){
+			achaOrdem();
 			criaChefesDisp();
 			criaAgentesDisp();
 			criaChefesEscalados();
@@ -133,7 +157,7 @@ angular.module('app')
 	}//fim do método buscar
 
 
-	//filtro comum aos checkboxes
+	//filtro' comum aos checkboxes
 	var filtro = function(value){
 		if(value.escalado === true){
 			return true;

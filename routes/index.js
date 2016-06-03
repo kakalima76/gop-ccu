@@ -42,6 +42,21 @@ router.get('/trocar', function(req, res, next) {
   res.render('trocar');
 });
 
+router.get('/agentes', function(req, res, next) {
+  res.render('templates/agentes');
+});
+
+
+router.get('/agentesTrocar', function(req, res, next) {
+  res.render('templates/agentesTrocar');
+});
+
+router.get('/chefiaTrocar', function(req, res, next) {
+  res.render('templates/chefiaTrocar');
+});
+
+
+
 
 
 
