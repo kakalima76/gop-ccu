@@ -2,9 +2,10 @@
   	<div class="col-lg-6">
 	    <div class="input-group">
 	      	<span class="input-group-addon">
+	      		<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ng-show="mostraLoadChefes"></span>
 	      		<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 	    	</span>
-			<h5  class="selecionados" ng-bind="chefe.nome" ng-click="trocarChefe(chefe.nome)"></h5>
+			<h5  class="selecionados" ng-bind="chefe.nome" ng-click="trocarChefe(chefe.nome, dia)"></h5>
 		</div>
   	</div>
 </div>

@@ -121,19 +121,29 @@ angular.module('app')
 
 		var testeChefes = $scope.chefes.filter(filtro);
 		testeChefes.forEach(function(value){
-			chefes.push(' ' + value.nome);
+			var rg = /plantão/g;
+			if(rg.test(value.nome)){
+				chefes.push(value.nome.replace('plantão', 's.normal'));
+			}else{
+				chefes.push(value.nome.replace('extra', 's.extra'));
+			}
+
 		})
 
-		var testeChefes = $scope.agentes.filter(filtro);
-		testeChefes.forEach(function(value){
-			agentes.push(' ' + value.nome);
+		var testeAgentes = $scope.agentes.filter(filtro);
+		testeAgentes.forEach(function(value){
+			var rg = /plantão/g;
+			if(rg.test(value.nome)){
+				agentes.push(value.nome.replace('plantão', 's.normal'));
+			}else{
+				agentes.push(value.nome.replace('extra', 's.extra'));
+			}
 		})
+
 
 		strChefes = chefes.toString();
 		strAgentes = agentes.toString();
-
 		ordemFactory.setEscala(strChefes.trim(), strAgentes.trim());
-
 	}
 
 	$scope.gerarViaturas = function(valor){
@@ -177,25 +187,41 @@ angular.module('app')
 		if(!isEmpty($scope.data) && !isEmpty($scope.inicio) && !isEmpty($scope.fim) && !isEmpty($scope.acao01)){
 			var data = $scope.data.replace(/(\/)+/g, '');
 			var os = $scope.numero;
-			var status = 'escalado';
+
 			ordemFactory.set(os, data, $scope.inicio.hora, $scope.fim.hora, acao01, acao02, acao03)
 			var ordem = ordemFactory.get();
 			var arrayAgentes = ordem.agentes.split(',');
 			var arrayChefes = ordem.chefe.split(',');
 
-			arrayAgentes.forEach(function(nome){
-				var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- plantão', '').replace('- extra', '').trim()
+			arrayAgentes.forEach(function(nome){	
+				var rg = /s.normal/g;
+				if(rg.test(nome)){
+					var status = 's.normal';
+				}else{
+					var status = 's.extra';
+				}
+
+				var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- s.normal', '').replace('- s.extra', '').trim()
+			
 				escalaService.atualizar(aux, os, status, data);
 			})
 
 			arrayChefes.forEach(function(nome){
-				var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- plantão', '').replace('- extra', '').trim()
+				var rg = /s.normal/g;
+				if(rg.test(nome)){
+					var status = 's.normal';
+				}else{
+					var status = 's.extra';
+				}
+	
+				var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- s.normal', '').replace('- s.extra', '').trim()
+
+				console.log(aux);
 				escalaService.atualizar(aux, os, status, data);
 			})
 
 			ordemService.set(ordemFactory.get());
-
-			//window.location.href = "/ordem";
+			/*window.location.href = "/ordem";*/
 		}else{
 			alert('Alguns campos faltando!!!')
 		}

@@ -106,8 +106,7 @@ angular.module('app')
 
 	$scope.pesquisar = function(agente){
 		pesquisado = [];
-		var data = '08/06/2016';
-		console.log('nome:' + agente.nome);
+
 		function filtro(value){
 			if(value.nome === agente.nome){
 				return true;
@@ -164,7 +163,7 @@ angular.module('app')
 
 			function filtro(value){
 				if(value[data]){
-					if(value[data].status === 'escalado'){
+					if(value[data].status === 's.plantão' || value[data].status === 's.extra'){
 						return true;
 					}
 				}
@@ -186,6 +185,7 @@ angular.module('app')
 					}
 				});
 			}
+
 
 		}//fim do laço for
 }//fim da função popula

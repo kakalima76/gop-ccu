@@ -16,7 +16,7 @@ angular.module('app')
 				var resp = null;
 				var promise = $http.get('http://ccuanexos.herokuapp.com/ordem/' + numero);
 				promise.then(function(dados){
-				var resp = dados.data[0].agentes.replace(/( \()+/g, '').replace(/(\))+/g, '').replace(/[0-9]/g, '').replace(/( - plantão)+/g, '').replace(/( - extra)+/g, '').trim();
+				var resp = dados.data[0].agentes;
 				resolve(resp);
 				});
 				promise.catch(function(){

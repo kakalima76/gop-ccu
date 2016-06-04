@@ -8,8 +8,6 @@ angular.module('app')
 	{status: 'chefe', chefe: true}
 	];
 
-	var dia = '08062016'
-
 	var filtro = function(value){
 		if(value[dia].status === 'plantão'){
 			return true;
@@ -20,7 +18,7 @@ angular.module('app')
     	return (val === undefined || val == null || val.length <= 0) ? true : false;
 	}
 
-	//possivelmente inútel
+	/*//possivelmente inútel
 	var promise = $http.get('http://ccuanexos.herokuapp.com/agentes');
 	promise.then(function(data){
 		data.data.forEach(function(value){
@@ -29,7 +27,7 @@ angular.module('app')
 			}
 			
 		})
-	})
+	})*/
 
 	$scope.salvar = function(){
 		var obj = {}
