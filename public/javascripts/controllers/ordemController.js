@@ -221,7 +221,7 @@ angular.module('app')
 			})
 
 			ordemService.set(ordemFactory.get());
-			/*window.location.href = "/ordem";*/
+			window.location.href = "/ordem";
 		}else{
 			alert('Alguns campos faltando!!!')
 		}

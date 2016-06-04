@@ -25,6 +25,21 @@ angular.module('app')
 		})//fim do método $q	
 	}//fim do método getOrdem
 
+	var getOrdemChefes = function(numero){
+			return $q(function(resolve, reject){
+				var resp = null;
+				var promise = $http.get('http://ccuanexos.herokuapp.com/ordem/' + numero);
+				promise.then(function(dados){
+				var resp = dados.data[0].chefe;
+				resolve(resp);
+				});
+				promise.catch(function(){
+					reject('Impossível localizar a O.S');
+				});
+		})//fim do método $q	
+	}//fim do método getOrdem
+
+
 	var atualAgente = function(agente, ordem){
 		var body = {}
 		body['numero'] = ordem;
@@ -34,10 +49,21 @@ angular.module('app')
 
 	}
 
+	var atualChefe = function(chefe, ordem){
+		var body = {}
+		body['numero'] = ordem;
+		body['chefe'] = chefe;
+
+			return $http.put('http://ccuanexos.herokuapp.com/ordem/atualChefe', body);
+
+	}
+
 	return {
 		get: get,
 		set: set,
 		getOrdem: getOrdem,
-		atualAgente: atualAgente
+		atualAgente: atualAgente,
+		atualChefe: atualChefe,
+		getOrdemChefes: getOrdemChefes
 	}
 }])
