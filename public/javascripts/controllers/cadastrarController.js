@@ -20,11 +20,12 @@ angular.module('app')
     	return (val === undefined || val == null || val.length <= 0) ? true : false;
 	}
 
+	//possivelmente inútel
 	var promise = $http.get('http://ccuanexos.herokuapp.com/agentes');
 	promise.then(function(data){
 		data.data.forEach(function(value){
 			if(value[dia]){
-				console.log(value['nome']);
+				
 			}
 			
 		})

@@ -13,12 +13,23 @@ angular.module('app')
 		})
 	}
 
+	var atualizarTroca = function(nome, ordem, status, data){
+		var obj = {}
+		obj['nome'] = nome;
+		obj['ordem'] = ordem;
+		obj['status'] = status;
+		obj['data'] = data;
+
+		return $http.put('https://ccuanexos.herokuapp.com/agentes/escala', obj);
+	}
+
 	var get = function(){
 		return $http.get('http://ccuanexos.herokuapp.com/agentes');
 	}
 
 	return{
 		atualizar: atualizar,
+		atualizarTroca: atualizarTroca,
 		get: get
 	}
 }])

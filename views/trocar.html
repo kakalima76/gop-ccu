@@ -20,6 +20,14 @@
 
 	<div class="form-group">
 
+    <div class="inputBox">
+    <label>Ordens de Serviço disponíveis:</label>
+    <div ng-repeat="o in resp" ng-class-odd="'odd'" ng-class-even="'even'">
+    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+    <label ng-bind="o.ordem"></label>
+    </div>
+    </div>  
+
   	<div class="inputBox">
   	<label>Chefes disponíveis:</label>
   	</div>
@@ -42,7 +50,7 @@
   	</div>
 	  	
   		<div ng-repeat="chefe in agentes" id="selecao">
-  		<div ng-include="chefeTemplate"></div>
+  		<div ng-include="agentesTemplate"></div>
   		</div> 
 
     <div class="inputBox">

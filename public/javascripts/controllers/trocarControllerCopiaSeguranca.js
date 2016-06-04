@@ -120,19 +120,19 @@ angular.module('app')
 
 			//coloquei o N p.o.f para evitar valores nulos na hora de pesquisar pela o.s
 			arrayAgentesDisp.forEach(function(value){
-				newAgentesDisp.push(value.nome + ' (' + value.contato + ') - Nº P.O.F: ' + value[date].ordem + ' - ' + value[date].status);
+				newAgentesDisp.push(value.nome + ' - Nº P.O.F: ' + value[date].ordem + ' - ' + value[date].status);
 			})
 
 			arrayChefesDisp.forEach(function(value){
-				newChefesDisp.push(value.nome + ' (' + value.contato + ') - Nº P.O.F: ' + value[date].ordem + ' - ' + value[date].status);
+				newChefesDisp.push(value.nome + ' - Nº P.O.F: ' + value[date].ordem + ' - ' + value[date].status);
 			})
 
 			arrayAgentesEscalados.forEach(function(value){
-				newAgentesEscalados.push(value.nome + ' (' + value.contato + ') - Nº P.O.F: ' + value[date].ordem);
+				newAgentesEscalados.push(value.nome + ' - Nº P.O.F: ' + value[date].ordem);
 			})
 
 			arrayChefesEscalados.forEach(function(value){
-				newChefesEscalados.push(value.nome + ' (' + value.contato + ') - Nº P.O.F: ' + value[date].ordem);
+				newChefesEscalados.push(value.nome + ' - Nº P.O.F: ' + value[date].ordem);
 			})
 
 			$cookies.put('agentesDisp', newAgentesDisp);
@@ -163,22 +163,13 @@ angular.module('app')
 	}
 
 		$scope.trocarAgente = function(value, dataOrdem){
-		var rg = / [0-9]{1}/g;//necessário para deixar apenas a o.s disponíveis
-		var rg2 = / [0-9]{5}/g;
-
-		if(rg.test(value)){
-			ordemDeServico = value.match(rg)[0].trim();
-		}else{
-			ordemDeServico = value.match(rg2)[0].trim();
-			console.log(ordemDeServico);
-		}
-		
+		var regex = /[0-9]+/g;//necessário para deixar apenas a o.s
 		var dia = (dataOrdem.replace(/(\/)+/g, ''));
+		var OSatual = value.match(regex)[0];
 		var result = prompt('Digite o número da nova ordem de serviço:');
-		var agenteModificado = value.replace(/( - Nº P.O.F: )/g, '').replace(/[0-9]/g, '').replace(/( \()+/g, '').replace(/(\))+/g, '').replace(/( - plantão)+/g, '').replace(/( - extra)+/g, '').trim();
+		var agenteModificado = value.replace(/( - Nº P.O.F: )/g, '').replace(/[0-9]/g, '');
+		
 		function desescalar(){ //define quais dos agente está presente na O.S Atual
-			var regex = / [0-9]{5}/g;//necessário para deixar apenas a o.s escaldados
-			var OSescalados = regex.exec(value)[0];
 			$scope.mostraLoad = true; //monstra o Load dos dados dos escalados
 			function filtroDesescalar(value){//filtra o agente que será retirado
 				if(value !== agenteModificado){
@@ -186,13 +177,13 @@ angular.module('app')
 				}
 			}
 
-			var promise = ordemService.getOrdem(OSescalados);//tras a ordem de serviço a ser modificada
+			var promise = ordemService.getOrdem(OSatual);//tras a ordem de serviço a ser modificada
 			promise.then(function(dados){
 				return dados;
 			}).then(function(dados){
 				var arrayAgentesOs = dados.split(',')//traz os agentes da os em forma de array
 				var novoArrayAgentesOs = arrayAgentesOs.filter(filtroDesescalar);//traz os agentes a serem atualizados na O.S pretendida
-				var promise = ordemService.atualAgente(novoArrayAgentesOs.toString().trim(), ordemDeServico)
+				var promise = ordemService.atualAgente(novoArrayAgentesOs.toString().trim(), OSatual)
 				promise.then(function(){
 					var promise = escalaService.atualizarTroca(agenteModificado, 0, 'plantão', dia);
 					promise.then(function(data){
@@ -230,24 +221,23 @@ angular.module('app')
 
 				if(testaExisteOrdem() === true){//verifica se a ordem de serviço solicitada para povoar existe
 					//aqui inicia o procedimento de encrementar a O.S coom um novo agente
-					$scope.mostraLoad = true;
 					var promise = ordemService.getOrdem(result);//tras a ordem de serviço escolhida na prompt
 					promise.then(function(dados){
 					return dados;
 					}).then(function(dados){
 					var arrayAgentesOs = dados.split(',')//traz os agentes da os em forma de array
-					var rgPlantao = /( - Nº P.O.F: 0)/g;
-					arrayAgentesOs.push(value.replace(rgPlantao, '')); //prepara uma string para atualização dos agentes na ordem de serviço
+					arrayAgentesOs.push(agenteModificado);
+					console.log(arrayAgentesOs);
 					
-					var promise = ordemService.atualAgente(arrayAgentesOs.toString().trim(), result)
+					/*var promise = ordemService.atualAgente(novoArrayAgentesOs.toString().trim(), OSatual)
 					promise.then(function(){
-						var promise = escalaService.atualizarTroca(agenteModificado, result, 'escalado', dia);
+						var promise = escalaService.atualizarTroca(agenteModificado, 0, 'plantão', dia);
 						promise.then(function(data){
 							buscar(dataOrdem);
 							$scope.mostraLoad = false;
 						})
 						
-					})
+					})*/
 				});
 
 				}else{
@@ -257,7 +247,7 @@ angular.module('app')
 		}//fim da função escalar
 
 		if(result === '0'){ //aqui será realizada o desescalar do agente da ordem atual
-			if(ordemDeServico !== '0'){//testa para ver se o agente está apenas disponível OSatual é o N° P.O.S
+			if(OSatual !== '0'){//testa para ver se o agente está apenas disponível OSatual é o N° P.O.S
 				desescalar();
 			}
 		}else{
@@ -271,7 +261,7 @@ angular.module('app')
 
 
 	//tem esse nome  mas na verdade pega os valores de chefes e agentes para a escala
-	/*$scope.testar = function(valor){
+	$scope.testar = function(valor){
 		var chefes = [];
 		var agentes = [];
 		var strChefes = null;
@@ -291,7 +281,7 @@ angular.module('app')
 		strAgentes = agentes.toString();
 
 		ordemFactory.setEscala(strChefes.trim(), strAgentes.trim());
-	}*/
+	}
 
 
 }])
