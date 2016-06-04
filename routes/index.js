@@ -55,6 +55,10 @@ router.get('/chefiaTrocar', function(req, res, next) {
   res.render('templates/chefiaTrocar');
 });
 
+router.get('/atualizar', function(req, res, next) {
+  res.render('atualizar');
+});
+
 
 
 

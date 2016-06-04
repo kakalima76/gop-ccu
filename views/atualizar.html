@@ -1,21 +1,21 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="corpo" ng-controller="ordemController">
+<div class="corpo" ng-controller="atualizarController">
 	<nav class="navbar navbar-default" >
       <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <a class="navbar-brand" href="/home">Escalar</a>
             <a class="navbar-brand" href="/trocar">Trocar</a>
+            <a class="navbar-brand" href="/ordem">Ordem de Serviço</a>
             <a class="navbar-brand" href="/cadastrar" >Cadastrar</a>
-            <a class="navbar-brand" href="/atualizar" >Atualizar</a>
           </div>
           <form class="navbar-form navbar-left" role="search">
               <div class="form-group">
-                  <input type="text" ng-model="dia" class="form-control data" placeholder="buscar O.S">
+                  <input type="number" ng-model="ordem" class="form-control" placeholder="buscar O.S">
               </div>
-                <button type="submit" class="btn btn-default" ng-click="imprimir(dia)">Buscar</button>
+                <button type="submit" class="btn btn-default" ng-click="buscar(ordem)">Buscar</button>
             </form>
       </div>
     </nav>
@@ -26,7 +26,7 @@
     <input class="form-control" id="numero" ng-model="numero" placeholder="número da ordem de serviço" disabled>
 
     <label for="data">Data</label>
-    <input class="form-control data" ng-model="data" placeholder="data" ng-change="buscar(data)">
+    <input class="form-control data" ng-model="data" placeholder="data" ng-change="buscar(data)" disabled>
 
   	<label for="inicio">Início</label>
   	<select class="form-control" id="inicio" ng-model="inicio" ng-options="item as item.hora for item in horas track by item.hora"></select>
@@ -48,22 +48,6 @@
     <div class="inputBox">
     <textarea class="form-control" rows="3" ng-model="acao03"></textarea>
     </div>
-
-  	<div class="inputBox">
-  	<label>Chefes disponíveis:</label>
-  	</div>
-	  	
-  		<div ng-repeat="chefe in chefes" id="selecao">
-  		<div ng-include="chefeTemplate"></div>
-  		</div> 
-
-  	<div class="inputBox">
-  	<label>Agentes disponíveis:</label>
-  	</div>
-	  	
-  		<div ng-repeat="chefe in agentes" id="selecao">
-  		<div ng-include="chefeTemplate"></div>
-  		</div> 
 
 
     <div class="inputBox">

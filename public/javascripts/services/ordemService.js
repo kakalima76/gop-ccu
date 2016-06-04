@@ -58,12 +58,32 @@ angular.module('app')
 
 	}
 
+	var atualOrdem = function(dados){
+		return $http.put('http://ccuanexos.herokuapp.com/ordem/escala', dados);
+	}
+
+	var getOrdemNumero = function(numero){
+			return $q(function(resolve, reject){
+				var resp = null;
+				var promise = $http.get('http://ccuanexos.herokuapp.com/ordem/' + numero);
+				promise.then(function(dados){
+				var resp = dados.data[0];
+				resolve(resp); 
+				});
+				promise.catch(function(){
+					reject('Impossível localizar a O.S');
+				});
+		})//fim do método $q	
+	}//fim do método getOrdem
+
 	return {
 		get: get,
 		set: set,
 		getOrdem: getOrdem,
 		atualAgente: atualAgente,
 		atualChefe: atualChefe,
-		getOrdemChefes: getOrdemChefes
+		getOrdemChefes: getOrdemChefes,
+		getOrdemNumero: getOrdemNumero,
+		atualOrdem: atualOrdem
 	}
 }])

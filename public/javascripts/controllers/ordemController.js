@@ -3,6 +3,7 @@ angular.module('app')
 	$scope.chefeTemplate = '/chefia';
 	$scope.equipeTemplate = '/equipes';
 	$scope.viaturaTemplate = '/viaturas';
+	
 	var promise = ordemFactory.getNumero();
 	promise.then(function(data){
 		$scope.numero = data.data[0].numero + 1;
