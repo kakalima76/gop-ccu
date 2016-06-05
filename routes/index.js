@@ -35,11 +35,11 @@ router.get('/ordens', function(req, res, next) {
 });
 
 router.get('/cadastrar', function(req, res, next) {
-  res.render('cadastrar');
+  res.render('cadastrar', { title: 'Página de cadastro'});
 });
 
 router.get('/trocar', function(req, res, next) {
-  res.render('trocar');
+  res.render('trocar', { title: 'Trocar agentes'});
 });
 
 router.get('/agentes', function(req, res, next) {
@@ -56,7 +56,7 @@ router.get('/chefiaTrocar', function(req, res, next) {
 });
 
 router.get('/atualizar', function(req, res, next) {
-  res.render('atualizar');
+  res.render('atualizar', { title: 'Atualizar O.S'});
 });
 
 

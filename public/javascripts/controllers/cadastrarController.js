@@ -1,6 +1,5 @@
 angular.module('app')
 .controller('cadastrarController', ['$scope', '$http', function($scope, $http){
-	console.log('cadastrarController');
 
 	$scope.opcoes = 
 	[
