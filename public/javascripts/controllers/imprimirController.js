@@ -1,4 +1,4 @@
-angular.module('app')
+angular.module('appPrint')
 .controller('imprimirController', ['$scope', '$http', '$cookies', function($scope, $http, $cookies){
 	$scope.ordemTemplate = '/ordens';
 	/*$scope.data = $cookies.get('dia');*/
