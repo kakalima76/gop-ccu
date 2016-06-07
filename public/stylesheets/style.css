@@ -89,6 +89,7 @@ header{
   padding: 2% 5% 5% 5%;
   background-color:#1874CD;
   border-radius: 2.5em;
+  -webkit-print-color-adjust: exact;
 }
 
 .corpo{
@@ -151,6 +152,7 @@ tr{
   color: white;
   background-color: black;
   text-decoration-line: underline;
+  -webkit-print-color-adjust: exact;
 }
 
 .justificado{
@@ -159,10 +161,12 @@ tr{
 
 .negrito{
   font-weight: bold;
+  -webkit-print-color-adjust: exact;
 }
 
 .amarelo{
   background-color: yellow;
+  -webkit-print-color-adjust: exact;
 }
 
 .tituloTabela{
@@ -190,7 +194,6 @@ tr{
   float: left;
   width: 500px;
   height: 100px;
-
   margin-left: 50px;
 }
 
@@ -209,9 +212,11 @@ tr{
 
 .odd{
   background-color: #FFCC99;
+  -webkit-print-color-adjust: exact;
 }
 .even{
   background-color: #C1CDC1;
+  -webkit-print-color-adjust: exact;
 }
 
 .glyphicon-refresh-animate {
@@ -235,3 +240,10 @@ tr{
     from { -moz-transform: rotate(0deg);}
     to { -moz-transform: rotate(360deg);}
 }
+
+    /*CSS para impressão*/
+    @media print {
+          @page {
+          margin: 0.5cm;
+          }
+    }
