@@ -333,12 +333,12 @@ angular.module('app')
 
 
 			if(result === '0'){ //aqui será realizada o desescalar do agente da ordem atual
-				if(ordemDeServico !== '0'){//testa para ver se o agente está apenas disponível OSatual é o N° P.O.S
+				if(ordemDeServico !== '0' && !isEmpty(result)){//testa para ver se o agente está apenas disponível OSatual é o N° P.O.S
 					desescalar();
 				}
 			}else{
 
-				if(ordemDeServico !== '0'){
+				if(ordemDeServico !== '0' && !isEmpty(result)){
 					mutua();
 				}else{
 					escalar();
@@ -514,12 +514,12 @@ angular.module('app')
 			}
 
 			if(result === '0'){ //aqui será realizada o desescalar do agente da ordem atual
-				if(ordemDeServico !== '0'){//testa para ver se o agente está apenas disponível OSatual é o N° P.O.S
+				if(ordemDeServico !== '0' && !isEmpty(result)){//testa para ver se o agente está apenas disponível OSatual é o N° P.O.S
 					desescalar();
 				}
 			}else{
 				
-				if(ordemDeServico !== '0'){
+				if(ordemDeServico !== '0' && !isEmpty(result)){
 					mutua();
 				}else{
 					escalar();
