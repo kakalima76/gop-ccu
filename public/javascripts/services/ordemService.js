@@ -7,7 +7,7 @@ angular.module('app')
 	var set = function(dados){
 		var promise = $http.post('http://ccuanexos.herokuapp.com/ordem', dados);
 		promise.catch(function(err){
-			console.log(err.error);
+			alert('Erro: ordemService.set()')
 		});
 	}
 

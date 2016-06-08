@@ -9,7 +9,7 @@ angular.module('app')
 
 		var promise = $http.put('https://ccuanexos.herokuapp.com/agentes/escala', obj);
 		promise.catch(function(){
-			alert('Problemas na comunicação com o servidor!!!');
+			alert('Problema: escalaService.atualizar.');
 		})
 	}
 
