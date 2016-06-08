@@ -84,8 +84,12 @@
 
 
   	<div class="inputBox">
-  	<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="salvar()">Salvar</button>
-  	</div>	
+  	<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="salvar()" ng-show="mostrar">Salvar</button>
+  	</div>
+
+    <div class="inputBox">
+    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="adicionar()" ng-show="!mostrar">Novo</button>
+    </div>	
 
     </div>
 </div>

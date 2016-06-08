@@ -11,6 +11,10 @@ angular.module('app')
 		});
 	}
 
+	var setOrdem = function(dados){
+		return $http.post('http://ccuanexos.herokuapp.com/ordem', dados);
+	}
+
 	var getOrdem = function(numero){
 			return $q(function(resolve, reject){
 				var resp = null;
@@ -79,6 +83,7 @@ angular.module('app')
 	return {
 		get: get,
 		set: set,
+		setOrdem: setOrdem,
 		getOrdem: getOrdem,
 		atualAgente: atualAgente,
 		atualChefe: atualChefe,

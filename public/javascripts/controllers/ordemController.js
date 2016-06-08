@@ -3,6 +3,7 @@ angular.module('app')
 	$scope.chefeTemplate = '/chefia';
 	$scope.equipeTemplate = '/equipes';
 	$scope.viaturaTemplate = '/viaturas';
+	$scope.mostrar = true;
 	
 	var promise = ordemFactory.getNumero();
 	promise.then(function(data){
@@ -169,66 +170,72 @@ angular.module('app')
 
 
 	$scope.salvar = function(){
-	var acao01 = '';
-	var acao02 = '';
-	var acao03 = '';
+		var acao01 = '';
+		var acao02 = '';
+		var acao03 = '';
 
-	if(!isEmpty($scope.acao01)){
-		acao01 ='- Ação programada 01: ' + $scope.acao01;
-	}
-
-	if(!isEmpty($scope.acao02)){
-		acao02 ='- Ação programada 02: ' + $scope.acao02;
-	}
-
-	if(!isEmpty($scope.acao03)){
-		acao03 ='- Ação programada 03: ' + $scope.acao03;
-	}
-
-		if(!isEmpty($scope.data) && !isEmpty($scope.inicio) && !isEmpty($scope.fim) && !isEmpty($scope.acao01)){
-			var data = $scope.data.replace(/(\/)+/g, '');
-			var os = $scope.numero;
-
-			ordemFactory.set(os, data, $scope.inicio.hora, $scope.fim.hora, acao01, acao02, acao03)
-			var ordem = ordemFactory.get();
-			var arrayAgentes = ordem.agentes.split(',');
-			var arrayChefes = ordem.chefe.split(',');
-
-			arrayAgentes.forEach(function(nome){	
-				var rg = /s.normal/g;
-				if(rg.test(nome)){
-					var status = 's.normal';
-				}else{
-					var status = 's.extra';
-				}
-
-				var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- s.normal', '').replace('- s.extra', '').trim()
-			
-				escalaService.atualizar(aux, os, status, data);
-			})
-
-			arrayChefes.forEach(function(nome){
-				var rg = /s.normal/g;
-				if(rg.test(nome)){
-					var status = 's.normal';
-				}else{
-					var status = 's.extra';
-				}
-	
-				var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- s.normal', '').replace('- s.extra', '').trim()
-
-				console.log(aux);
-				escalaService.atualizar(aux, os, status, data);
-			})
-
-			ordemService.set(ordemFactory.get());
-			window.location.href = "/ordem";
-		}else{
-			alert('Alguns campos faltando!!!')
+		if(!isEmpty($scope.acao01)){
+			acao01 ='- Ação programada 01: ' + $scope.acao01;
 		}
 
-		
-	
+		if(!isEmpty($scope.acao02)){
+			acao02 ='- Ação programada 02: ' + $scope.acao02;
+		}
+
+		if(!isEmpty($scope.acao03)){
+			acao03 ='- Ação programada 03: ' + $scope.acao03;
+		}
+
+			if(!isEmpty($scope.data) && !isEmpty($scope.inicio) && !isEmpty($scope.fim) && !isEmpty($scope.acao01)){
+				var data = $scope.data.replace(/(\/)+/g, '');
+				var os = $scope.numero;
+
+				ordemFactory.set(os, data, $scope.inicio.hora, $scope.fim.hora, acao01, acao02, acao03)
+				var ordem = ordemFactory.get();
+				var arrayAgentes = ordem.agentes.split(',');
+				var arrayChefes = ordem.chefe.split(',');
+
+				
+
+				ordemService.setOrdem(ordemFactory.get())
+				.then(function(){
+						arrayAgentes.forEach(function(nome){	
+						var rg = /s.normal/g;
+						if(rg.test(nome)){
+							var status = 's.normal';
+						}else{
+							var status = 's.extra';
+						}
+
+						var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- s.normal', '').replace('- s.extra', '').trim()
+					
+						escalaService.atualizar(aux, os, status, data);
+					})
+
+					arrayChefes.forEach(function(nome){
+						var rg = /s.normal/g;
+						if(rg.test(nome)){
+							var status = 's.normal';
+						}else{
+							var status = 's.extra';
+						}
+			
+						var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- s.normal', '').replace('- s.extra', '').trim();
+						escalaService.atualizar(aux, os, status, data);
+					})
+				})
+				.then(function(){
+					$scope.mostrar = false;
+				})
+				
+				
+			}else{
+				alert('Alguns campos faltando!!!')
+			}		
+	}//fim do método salvar
+
+	$scope.adicionar = function(){
+		window.location.href = "/ordem";
 	}
 
 }])
