@@ -32,6 +32,9 @@ angular.module('app')
 			var promise = $http.post('http://ccuanexos.herokuapp.com/agentes', obj);
 			promise.then(function(dados){
 				alert('Salvo com sucesso!');
+				$scope.matricula = null;
+				$scope.nome = null;
+				$scope.contato = '999999999';
 			});
 			promise.catch(function(err){
 				alert('Registro já consta na base de dados.');
