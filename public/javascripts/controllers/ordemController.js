@@ -20,7 +20,7 @@ angular.module('app')
 		window.location.href = "/imprimir";
 	}
 
-	var equipes = ['PAF01','PAF02','PAF03','PAF04','PAF05','PAF06','PAF07','PAF08','PAF09', 'PAF10', 'PAF11', 'NEP'];
+	var equipes = ['PAF01','PAF02','PAF03','PAF04','PAF05','PAF06','PAF07','PAF08','PAF09','PAF10','PAF11','24 HORAS','NEP'];
 	$scope.equipes = [];
 	equipes.forEach(function(value){
 		$scope.equipes.push({equipe: value})
