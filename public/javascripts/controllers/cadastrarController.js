@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('cadastrarController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
+.controller('cadastrarController', ['$scope', '$http', '$filter', 'agenteService', function($scope, $http, $filter, agenteService){
 	$scope.contato = '999999999'
 
 	$scope.opcoes = 
@@ -35,13 +35,25 @@ angular.module('app')
 				$scope.matricula = null;
 				$scope.nome = null;
 				$scope.contato = '999999999';
+				$scope.status = null;
 			});
 			promise.catch(function(err){
 				alert('Registro já consta na base de dados.');
 			})
 		}
+	}
 
-
+	$scope.inserir = function(){
+		if(!isEmpty($scope.matricula)){
+			var promise = agenteService.get($scope.matricula);
+			promise.then(function(dados){
+				if(!isEmpty(dados.data)){
+					agenteService.set($scope.matricula, $scope.contato);
+				}else{
+					alert('matricula inexistente');
+				}
+			})
+		}
 	}
 
 

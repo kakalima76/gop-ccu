@@ -31,10 +31,18 @@
                     <input type="text" class="form-control" placeholder="nome" ng-model='nome'>
             </div>
 
-            <div class="form-group">
-                <label for="contato">Contato:</label>
-                    <input type="text" class="form-control" placeholder="contato" ng-model='contato'>
-            </div>
+        </form>
+
+            <form class="form-inline">
+
+                <div class="form-group">
+                    <label for="contato">Contato:</label>
+                        <input type="text" class="form-control" placeholder="contato" ng-model='contato'>
+                </div>
+
+                <button type="submit" class="btn btn-default" ng-click="inserir()">atualizar</button>
+
+            </form>
 
                 <label for="satus">Status:</label>
                     <select class="form-control" ng-model="status" ng-options="item as item.status for item in opcoes track by item.chefe" ng-change="calcular()"></select>

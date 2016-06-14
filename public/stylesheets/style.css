@@ -246,4 +246,15 @@ tr{
           @page {
           margin: 0.5cm;
           }
+
+          body{
+            background-color: blue;
+          }
+
+
+    }
+
+    .distancia {
+      margin-top: 2%;
+      margin-bottom: 2%;
     }
