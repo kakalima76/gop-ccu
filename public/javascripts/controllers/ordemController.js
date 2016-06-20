@@ -221,6 +221,12 @@ angular.module('app')
 						}
 			
 						var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- s.normal', '').replace('- s.extra', '').trim();
+						
+						if(nome.chefe.length < 1){
+							nome.chefe = 'CARMO (989095810)- SUPORTE OPERACIONAL';
+						}
+
+
 						escalaService.atualizar(aux, os, status, data);
 					})
 				})

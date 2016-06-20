@@ -10,8 +10,20 @@ angular.module('appPrint')
 		}
 	}
 
+	
+
 		var promise = $http.get('http://ccuanexos.herokuapp.com/ordem');
 		promise.then(function(dados){
+
+			function compare(a,b) {
+			  	if(a.numero < b.numero){
+			  		return -1;
+			  	}else if (a.numero > b.numero){
+			  		return 1;
+			  	}else{
+			  		return 0;
+			    }	 
+			}
 
 			dados.data.forEach(function(value){
 				if(value.agentes){
@@ -26,10 +38,14 @@ angular.module('appPrint')
 					if(value.chefe.substring(0,1) === ','){
 						value.chefe = value.chefe.substring(1);
 					}
+				}else{	
+					value.chefe = 'CARMO (989095810)- SUPORTE OPERACIONAL';
 				}
+
 			})
 			
 			$scope.ordens = dados.data.filter(filtrar);
+			$scope.ordens + $scope.ordens.sort(compare);
 			var count = 0;
 
 			$scope.ordens.forEach(function(value){

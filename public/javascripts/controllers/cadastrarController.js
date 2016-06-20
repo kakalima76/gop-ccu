@@ -28,7 +28,7 @@ angular.module('app')
 			obj['nome'] =  $filter('uppercase')($scope.nome);
 			obj['contato'] = $scope.contato;
 			obj['matricula'] = $scope.matricula;
-			obj['chefe'] = $scope.status.status;
+			obj['chefe'] = $scope.status.chefe;
 			var promise = $http.post('http://ccuanexos.herokuapp.com/agentes', obj);
 			promise.then(function(dados){
 				alert('Salvo com sucesso!');
