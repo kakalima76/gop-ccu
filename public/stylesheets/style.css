@@ -45,7 +45,10 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+  page-break-inside:auto
 }
+
+thead { display:table-header-group }
 
 header{
   position: absolute;
@@ -217,6 +220,14 @@ tr{
   -webkit-print-color-adjust: exact;
 }
 
+@media print {
+  .odd{
+  background-color: #FFCC99;
+  -webkit-print-color-adjust: exact;
+}
+
+
+
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
     -ms-animation: spin .7s infinite linear;
@@ -245,7 +256,7 @@ tr{
           margin: 0.5cm;
           }
 
-          body{
+          @body{
             background-color: blue;
           }
 
@@ -255,4 +266,8 @@ tr{
     .distancia {
       margin-top: 2%;
       margin-bottom: 2%;
+    }
+
+    table, figure {
+    page-break-inside: avoid;
     }
