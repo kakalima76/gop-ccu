@@ -190,12 +190,10 @@ angular.module('app')
 				var data = $scope.data.replace(/(\/)+/g, '');
 				var os = $scope.numero;
 
-				ordemFactory.set(os, data, $scope.inicio.hora, $scope.fim.hora, acao01, acao02, acao03)
+				ordemFactory.set(os, data, $scope.inicio.hora, $scope.fim.hora, acao01, acao02, acao03);
 				var ordem = ordemFactory.get();
 				var arrayAgentes = ordem.agentes.split(',');
 				var arrayChefes = ordem.chefe.split(',');
-
-				
 
 				ordemService.setOrdem(ordemFactory.get())
 				.then(function(){
@@ -222,17 +220,19 @@ angular.module('app')
 			
 						var aux = nome.replace('(', '').replace(')', '').replace(/[0-9]/g, '').replace('- s.normal', '').replace('- s.extra', '').trim();
 						
-						if(nome.chefe.length < 1){
-							nome.chefe = 'CARMO (989095810)- SUPORTE OPERACIONAL';
+						if(isEmpty(nome)){
+							nome = 'CARMO (989095810)- SUPORTE OPERACIONAL';
 						}
 
 
 						escalaService.atualizar(aux, os, status, data);
 					})
+
+					window.location.href = "/ordem";
+				}).catch(function(){
+					alert('Ligue para o administrador!');
 				})
-				.then(function(){
-					$scope.mostrar = false;
-				})
+				
 				
 				
 			}else{
@@ -240,8 +240,6 @@ angular.module('app')
 			}		
 	}//fim do método salvar
 
-	$scope.adicionar = function(){
-		window.location.href = "/ordem";
-	}
+
 
 }])
