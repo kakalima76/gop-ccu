@@ -215,6 +215,16 @@ tr{
   float: right;
 }
 
+.odd{
+  background-color: #00BFFF;
+  -webkit-print-color-adjust: exact;
+}
+
+.even{
+  background-color: #FF6666;
+  -webkit-print-color-adjust: exact;
+}
+
 .odd0{
   background-color: #00BFFF;
   -webkit-print-color-adjust: exact;
@@ -243,32 +253,32 @@ tr{
 
 
 
-.even12{
+.odd12{
   background-color: #FF6666;
   -webkit-print-color-adjust: exact;
 }
 
-.even14{
+.odd14{
   background-color: #FFCC33;
   -webkit-print-color-adjust: exact;
 }
 
-.even16{
+.odd16{
   background-color: #FFCC99;
   -webkit-print-color-adjust: exact;
 }
 
-.even18{
+.odd18{
   background-color: #7FFF00;
   -webkit-print-color-adjust: exact;
 }
 
-.even20{
+.odd20{
   background-color: #FFC1C1;
   -webkit-print-color-adjust: exact;
 }
 
-.even22{
+.odd22{
   background-color: #FF7F00;
   -webkit-print-color-adjust: exact;
 }
