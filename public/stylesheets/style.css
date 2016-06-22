@@ -115,21 +115,25 @@ header{
 
 .tabela{
   border-style: solid;
-  border-width: 1px;
+  border-width: 2px;
   width: 100%;
   height: 150px;
+  font-weight: bold;
+  border-color: white;
 }
 
 td{
   border-style: solid;
-  border-width: 1px;
+  border-width: 3px;
   vertical-align: middle;
+  border-color: white;
 
 }
 
 tr{
   border-style: solid;
   border-width: 1px;
+  border-color: white;
 }
 
 .col1{
@@ -211,22 +215,123 @@ tr{
   float: right;
 }
 
-.odd{
+.odd0{
+  background-color: #00BFFF;
+  -webkit-print-color-adjust: exact;
+}
+
+.odd2{
+  background-color: #ADD8E6;
+  -webkit-print-color-adjust: exact;
+}
+.odd4{
+  background-color: #40E0D0;
+  -webkit-print-color-adjust: exact;
+}
+.odd6{
+  background-color: #3299CC;
+  -webkit-print-color-adjust: exact;
+}
+.odd8{
+  background-color: #8FBC8F;
+  -webkit-print-color-adjust: exact;
+}
+.odd10{
+  background-color: #98FB98;
+  -webkit-print-color-adjust: exact;
+}
+
+
+
+.even12{
+  background-color: #FF6666;
+  -webkit-print-color-adjust: exact;
+}
+
+.even14{
+  background-color: #FFCC33;
+  -webkit-print-color-adjust: exact;
+}
+
+.even16{
   background-color: #FFCC99;
   -webkit-print-color-adjust: exact;
 }
-.even{
-  background-color: #C1CDC1;
+
+.even18{
+  background-color: #7FFF00;
   -webkit-print-color-adjust: exact;
 }
 
-@media print {
-  .odd{
+.even20{
+  background-color: #FFC1C1;
+  -webkit-print-color-adjust: exact;
+}
+
+.even22{
+  background-color: #FF7F00;
+  -webkit-print-color-adjust: exact;
+}
+
+.even1{
+  background-color: #FF6666;
+  -webkit-print-color-adjust: exact;
+}
+
+.even3{
+  background-color: #FFCC33;
+  -webkit-print-color-adjust: exact;
+}
+
+.even5{
   background-color: #FFCC99;
   -webkit-print-color-adjust: exact;
 }
 
+.even7{
+  background-color: #7FFF00;
+  -webkit-print-color-adjust: exact;
+}
 
+.even9{
+  background-color: #FFC1C1;
+  -webkit-print-color-adjust: exact;
+}
+
+.even11{
+  background-color: #FF7F00;
+  -webkit-print-color-adjust: exact;
+}
+
+.even13{
+  background-color: #FF6666;
+  -webkit-print-color-adjust: exact;
+}
+
+.even15{
+  background-color: #FFCC33;
+  -webkit-print-color-adjust: exact;
+}
+
+.even17{
+  background-color: #FFCC99;
+  -webkit-print-color-adjust: exact;
+}
+
+.even19{
+  background-color: #7FFF00;
+  -webkit-print-color-adjust: exact;
+}
+
+.even21{
+  background-color: #FFC1C1;
+  -webkit-print-color-adjust: exact;
+}
+
+.even23{
+  background-color: #FF7F00;
+  -webkit-print-color-adjust: exact;
+}
 
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
@@ -255,12 +360,6 @@ tr{
           @page {
           margin: 0.5cm;
           }
-
-          @body{
-            background-color: blue;
-          }
-
-
     }
 
     .distancia {
@@ -271,3 +370,31 @@ tr{
     table, figure {
     page-break-inside: avoid;
     }
+
+.avisos{
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 2px;
+  padding-right: 2px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+span{
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  line-height: 1.2;
+}
+
+.fonteBranca{
+  color: white;
+}
+
+.violetRed{
+  background-color: #D02090;
+  color: white;
+}

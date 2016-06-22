@@ -4,6 +4,9 @@ angular.module('appPrint')
 	/*$scope.data = $cookies.get('dia');*/
 
 
+	$scope.linhas = ['linha0', 'linha1', 'linha2', 'linha3', 'linha4', 'linha5', 'linha6', 'linha7', 'linha8', 'linha9']
+
+
 	var filtrar = function (value) {
 		if(value.data === $cookies.get('dia').replace(/(\/)+/g, '')){
 			return true;
@@ -27,7 +30,7 @@ angular.module('appPrint')
 
 			dados.data.forEach(function(value){
 				if(value.agentes){
-					value;agentes =value.agentes.replace(/(,)+/g, ', ');
+					value.agentes =value.agentes.replace(/(,)+/g, ', ');
 					if(value.agentes.substring(0,1) === ','){
 						value.agentes = value.agentes.substring(1);
 					}
@@ -40,6 +43,18 @@ angular.module('appPrint')
 					}
 				}else{	
 					value.chefe = 'CARMO (989095810)- SUPORTE OPERACIONAL';
+				}
+
+				if(value.acao01){
+					value.acao01 = value.acao01.toUpperCase();
+				}
+
+				if(value.acao02){
+					value.acao02 = value.acao02.toUpperCase();
+				}
+
+				if(value.acao03){
+					value.acao03 = value.acao03.toUpperCase();
 				}
 
 			})
