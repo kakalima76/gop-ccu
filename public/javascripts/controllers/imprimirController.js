@@ -30,14 +30,14 @@ angular.module('appPrint')
 
 			dados.data.forEach(function(value){
 				if(value.agentes){
-					value.agentes =value.agentes.replace(/(,)+/g, ', ');
+					value.agentes = value.agentes.replace(/(,)+/g, ', ').replace(/\(999999999\)/g,'');
 					if(value.agentes.substring(0,1) === ','){
 						value.agentes = value.agentes.substring(1);
 					}
 				}
 
 				if(value.chefe){
-					value.chefe = value.chefe.replace(/(,)+/g, ', ');
+					value.chefe = value.chefe.replace(/(,)+/g, ', ').replace(/\(999999999\)/g,'');
 					if(value.chefe.substring(0,1) === ','){
 						value.chefe = value.chefe.substring(1);
 					}
