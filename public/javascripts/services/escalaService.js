@@ -8,13 +8,12 @@ angular.module('app')
 		obj['data'] = data;
 
 		var promise = $http.put('http://ccuanexos.herokuapp.com/agentes/escala', obj);
-		/*promise.then(function(dados){
-			alert(dados);
-		})*/
+		promise.then(function(dados){
+		});
 		promise.catch(function(err){
 			alert('Problema: escalaService.atualizar.');
 			console.log(err.message)
-		})
+		});
 	}
 
 	var atualizarTroca = function(nome, ordem, status, data){
