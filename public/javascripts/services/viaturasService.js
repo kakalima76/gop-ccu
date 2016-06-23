@@ -8,7 +8,7 @@ angular.module('app')
 		{tipo: 'AMAROK', placa: 'KXQ 5231'},
 		{tipo: 'AMAROK', placa: 'KWY 4899'},
 		{tipo: 'AMAROK', placa: 'KWX 5751'},
-		{tipo: 'AMAROK', placa: 'KWX 5777'},
+		{tipo: 'AMAROK', placa: 'KWV 5777'},
 		{tipo: 'AMAROK', placa: 'KXA 5127'},
 		{tipo: 'AMAROK', placa: 'KWP 5822'},
 		{tipo: 'AMAROK', placa: 'KWW 4772'},

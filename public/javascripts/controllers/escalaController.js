@@ -31,7 +31,6 @@ angular.module('app')
 		{id: 0, status: 'expediente'},
 		{id: 1, status: 'folga'},
 		{id: 2, status: 'plantão'},
-		{id: 3, status: '24horas'},
 		{id: 4, status: 'extra'},
 		{id: 5, status: 'complemento'},
 		{id: 6, status: 'férias'},
