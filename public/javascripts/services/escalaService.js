@@ -6,6 +6,8 @@ angular.module('app')
 		obj['ordem'] = ordem;
 		obj['status'] = status;
 		obj['data'] = data;
+		obj['ordemEspecial'] = 0;
+		obj['especial'] = '';
 
 		var promise = $http.put('http://ccuanexos.herokuapp.com/agentes/escala', obj);
 		promise.then(function(dados){
@@ -22,6 +24,8 @@ angular.module('app')
 		obj['ordem'] = ordem;
 		obj['status'] = status;
 		obj['data'] = data;
+		obj['ordemEspecial'] = 0;
+		obj['especial'] = '';
 
 		return $http.put('http://ccuanexos.herokuapp.com/agentes/escala', obj);
 	}
