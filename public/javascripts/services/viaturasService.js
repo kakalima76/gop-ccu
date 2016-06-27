@@ -5,7 +5,7 @@ angular.module('app')
 	var viaturas = 
 	[
 		{tipo: 'AMAROK', placa: 'KXC 5822'},
-		{tipo: 'AMAROK', placa: 'KXQ 5231'},
+		{tipo: 'AMAROK', placa: 'KWQ 5231'},
 		{tipo: 'AMAROK', placa: 'KWY 4899'},
 		{tipo: 'AMAROK', placa: 'KWX 5751'},
 		{tipo: 'AMAROK', placa: 'KWV 5777'},
