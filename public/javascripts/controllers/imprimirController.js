@@ -30,14 +30,14 @@ angular.module('appPrint')
 
 			dados.data.forEach(function(value){
 				if(value.agentes){
-					value.agentes = value.agentes.replace(/(,)+/g, ', ').replace(/\(999999999\)/g,'');
+					value.agentes = value.agentes.replace(/(,)+/g, ', ').replace(/\(999999999\)/g,'').replace(/ - s.normal/g, '').trim();
 					if(value.agentes.substring(0,1) === ','){
 						value.agentes = value.agentes.substring(1);
 					}
 				}
 
 				if(value.chefe){
-					value.chefe = value.chefe.replace(/(,)+/g, ', ').replace(/\(999999999\)/g,'');
+					value.chefe = value.chefe.replace(/(,)+/g, ', ').replace(/\(999999999\)/g,'').replace(/ - s.normal/g, '').trim();
 					if(value.chefe.substring(0,1) === ','){
 						value.chefe = value.chefe.substring(1);
 					}
@@ -82,9 +82,9 @@ angular.module('appPrint')
 	
 		var data = new Date(str.ano, str.mes, str.dia);
 		var meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro']
-		var semana = ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado', 'domingo']
+		var semana = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado']
 		var dia = data.getDate();
-		var semana = semana[data.getDay() - 1];
+		var semana = semana[data.getDay()];
 		var mes = meses[data.getMonth()];
 		var ano = data.getFullYear();
 		var res = 'Rio de Janeiro, ' + semana + ', ' + dia + ' de ' + mes + ' de ' + ano + '.'; 
