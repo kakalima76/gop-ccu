@@ -157,7 +157,9 @@ angular.module('app')
 			nome: agente.nome,
 			data: data,
 			ordem: '0',
-			status: status.status
+			status: status.status,
+			ordemEspecial: 0,
+			especial: ''
 			}
 
 			function filtro(value){
