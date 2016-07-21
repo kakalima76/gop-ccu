@@ -21,10 +21,10 @@ angular.module('app')
 		window.location.href = "/imprimir";
 	}
 
-	/*var equipes = ['MOP01', 'MOP02', 'MOP03', 'MOP04', 'MOP05', 'MOP06', 'MOP07', 'MOP08', 'PRONTO ATENDIMENTO 1', 'PRONTO ATENDIMENTO 2', 'DEPÓSITO AVANÇADO', 'LOGÍSTICA', '24 HORAS']*/
+	var equipes = ['MOP01', 'MOP02', 'MOP03', 'MOP04', 'MOP05', 'MOP06', 'MOP07', 'MOP08', 'PRONTO ATENDIMENTO 1', 'PRONTO ATENDIMENTO 2', 'DEPÓSITO AVANÇADO', 'LOGÍSTICA', '24 HORAS']
 
-	var equipes = ['PAF01','PAF02','PAF03','PAF04','PAF05','PAF06','PAF07','PAF08','PAF09','PAF10','PAF11','24 HORAS','NEP'];
-	$scope.equipes = [];
+	/*var equipes = ['PAF01','PAF02','PAF03','PAF04','PAF05','PAF06','PAF07','PAF08','PAF09','PAF10','PAF11','24 HORAS','NEP'];
+	*/$scope.equipes = [];
 	equipes.forEach(function(value){
 		$scope.equipes.push({equipe: value})
 	});
