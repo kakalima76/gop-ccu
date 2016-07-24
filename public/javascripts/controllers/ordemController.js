@@ -211,7 +211,6 @@ angular.module('app')
 
 
 
-
 			if(!isEmpty($scope.data) && !isEmpty($scope.inicio) && !isEmpty($scope.fim) && !isEmpty($scope.acao01)){
 				var data = $scope.data.replace(/(\/)+/g, '');
 				var os = $scope.numero;
