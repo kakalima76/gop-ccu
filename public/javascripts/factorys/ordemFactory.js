@@ -16,6 +16,10 @@ angular.module('app')
         "acao01": "",
         "acao02": "",
         "acao03": "",
+        "acao04": "",
+        "acao05": "",
+        "acao06": "",
+        "acao07": "",
         "equipe": ""
     }
 
@@ -27,7 +31,7 @@ angular.module('app')
 	}
 
 
-    var set = function(numero, data, apresentacao, termino, acao01, acao02, acao03){
+    var set = function(numero, data, apresentacao, termino, acao01, acao02, acao03, acao04, acao05, acao06, acao07){
     	ordem.numero = numero;
     	ordem.data = data;
     	ordem.apresentacao = apresentacao;
@@ -35,6 +39,10 @@ angular.module('app')
     	ordem.acao01 = acao01;
         ordem.acao02 = acao02;
         ordem.acao03 = acao03;
+        ordem.acao04 = acao04;
+        ordem.acao05 = acao05;
+        ordem.acao06 = acao06;
+        ordem.acao07 = acao07;
     }
 
     var setViaturas = function(viatura){

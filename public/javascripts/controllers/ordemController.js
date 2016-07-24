@@ -175,6 +175,10 @@ angular.module('app')
 		var acao01 = '';
 		var acao02 = '';
 		var acao03 = '';
+		var acao04 = '';
+		var acao05 = '';
+		var acao06 = '';
+		var acao07 = '';
 
 		if(!isEmpty($scope.acao01)){
 			acao01 ='- Ação programada 01: ' + $scope.acao01;
@@ -188,11 +192,31 @@ angular.module('app')
 			acao03 ='- Ação programada 03: ' + $scope.acao03;
 		}
 
+		if(!isEmpty($scope.acao04)){
+			acao04 ='- Ação programada 04: ' + $scope.acao04;
+		}
+
+		if(!isEmpty($scope.acao05)){
+			acao05 ='- Ação programada 05: ' + $scope.acao05;
+		}
+
+		if(!isEmpty($scope.acao06)){
+			acao06 ='- Ação programada 06: ' + $scope.acao06;
+		}
+
+		if(!isEmpty($scope.acao07)){
+			acao07 ='- Ação programada 07: ' + $scope.acao07;
+		}
+
+
+
+
+
 			if(!isEmpty($scope.data) && !isEmpty($scope.inicio) && !isEmpty($scope.fim) && !isEmpty($scope.acao01)){
 				var data = $scope.data.replace(/(\/)+/g, '');
 				var os = $scope.numero;
 
-				ordemFactory.set(os, data, $scope.inicio.hora, $scope.fim.hora, acao01, acao02, acao03);
+				ordemFactory.set(os, data, $scope.inicio.hora, $scope.fim.hora, acao01, acao02, acao03, acao04, acao05, acao06, acao07);
 				var ordem = ordemFactory.get();
 				var arrayAgentes = ordem.agentes.split(',');
 				var arrayChefes = ordem.chefe.split(',');
