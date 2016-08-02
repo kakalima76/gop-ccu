@@ -15,7 +15,25 @@ $scope.chefeTemplate = '/chefia';
 		window.location.href = "/imprimir";
 	}
 
-	var equipes = ['PAF01','PAF02','PAF03','PAF04','PAF05','PAF06','PAF07','PAF08','PAF09', 'PAF10', 'PAF11', '24 HORAS','NEP'];
+	var equipes = [
+					'MOPI 01 - BARRA DA TIJUCA - RUA CARLOS OSWALD N° 390 - BARRA DA TIJUCA', 
+					'MOPI 02 - BOTAFOGO - RUA BAMBINA N° 37 - BOTAFOGO', 
+					'MOPI 03 - LEBLON - PÇA N. SRA. AUXILIADORA S/N° - UOP LEBLON', 
+					'MOPI 04 - CATETE - RUA ANTÔNIO MENDES CAMPOS N° 77 - GLÓRIA (UOP CATETE)', 
+					'MOPI 05 - CENTRO - RUA SOUZA E SILVA N° 09 - GAMBOA (UOP PORTO)', 
+					'MOPI 06 - MARACANÃ - AV. MARACANÃ N° 230 - MARACANÃ (UOP TIJUCA)', 
+					'MOPI 07 - MÉIER - RUA DR. LEAL N° 706 - ENGENHO DE DENTRO', 
+					'MOPI 08 - BANGU - RUA BIARRITZ S/N° - BANGU', 
+					'RH/ADM/LOGÍSTICA', 
+					'AUTOS/ADM/LOGÍSTICA',
+					'PROTOCOLO/ADM/LOGÍSTICA', 
+					'GABINETE/ADM/LOGÍSTICA',
+					'GERÊNCIA DE OPERAÇÕES',
+					'SALA DE CRISE',
+					'DEPÓSITO AVANÇADO', 
+					'24 HORAS'
+				];
+	
 	$scope.equipes = [];
 	equipes.forEach(function(value){
 		$scope.equipes.push({equipe: value, escalado: false})
