@@ -37,7 +37,9 @@ angular.module('app')
 					'GERÊNCIA DE OPERAÇÕES',
 					'SALA DE CRISE',
 					'DEPÓSITO AVANÇADO', 
-					'24 HORAS'
+					'24 HORAS',
+					'SETOR DE TRANSPORTE',
+					'NÚCLEO DE ESTUDOS E DIVULGAÇÃO'
 				]
 
 	/*var equipes = ['PAF01','PAF02','PAF03','PAF04','PAF05','PAF06','PAF07','PAF08','PAF09','PAF10','PAF11','24 HORAS','NEP'];
