@@ -33,7 +33,10 @@ $scope.chefeTemplate = '/chefia';
 					'DEPÓSITO AVANÇADO', 
 					'24 HORAS',
 					'SETOR DE TRANSPORTE',
-					'NÚCLEO DE ESTUDOS E DIVULGAÇÃO'
+					'NÚCLEO DE ESTUDOS E DIVULGAÇÃO',
+					'APOIO À MOPI',
+					'NÚCLEO DE ESTUDOS E PROJETOS',
+					'DEPÓSITO/WEB/PRAÇA MAUÁ'
 				];
 	
 	$scope.equipes = [];
