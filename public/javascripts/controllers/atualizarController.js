@@ -15,6 +15,8 @@ $scope.chefeTemplate = '/chefia';
 		window.location.href = "/imprimir";
 	}
 
+	//alteração
+
 	var equipes = [
 					'MOPI 01 - BARRA DA TIJUCA - RUA CARLOS OSWALD N° 390 - BARRA DA TIJUCA', 
 					'MOPI 02 - BOTAFOGO - RUA BAMBINA N° 37 - BOTAFOGO', 
