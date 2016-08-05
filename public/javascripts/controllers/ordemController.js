@@ -42,7 +42,7 @@ angular.module('app')
 					'NÚCLEO DE ESTUDOS E DIVULGAÇÃO',
 					'APOIO À MOPI',
 					'NÚCLEO DE ESTUDOS E PROJETOS',
-					'DEPÓSITO/WEB/PRAÇA MAUÁ'
+					'LIVE SITES'
 				];
 
 	/*var equipes = ['PAF01','PAF02','PAF03','PAF04','PAF05','PAF06','PAF07','PAF08','PAF09','PAF10','PAF11','24 HORAS','NEP'];
