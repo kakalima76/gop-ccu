@@ -38,7 +38,11 @@ $scope.chefeTemplate = '/chefia';
 					'NÚCLEO DE ESTUDOS E DIVULGAÇÃO',
 					'APOIO À MOPI',
 					'NÚCLEO DE ESTUDOS E PROJETOS',
-					'LIVE SITES'
+					'LIVE SITES',
+					'1746/OUVIDORIAS 01',
+					'1746/OUVIDORIAS 02',
+					'PRONTO ATENDIMENTO GOP 01',
+					'PRONTO ATENDIMENTO GOP 02'
 				];
 	
 	$scope.equipes = [];
